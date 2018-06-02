@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\6633e7b4973b2a08cd66cfae62b7d516\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\d11c4dd1c759ebf37ff6eef24c21fbf4\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\e0ddbe433dd212fa24f2b1ef0bf7eb3c\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\afef7a3ebb9e53b0ea072697792c1801\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

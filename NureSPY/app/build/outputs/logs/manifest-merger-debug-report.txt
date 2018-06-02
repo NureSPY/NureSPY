@@ -1,40 +1,40 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\6633e7b4973b2a08cd66cfae62b7d516\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e0ddbe433dd212fa24f2b1ef0bf7eb3c\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\97124964b0feea730cb5516a2c3f68ec\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\2a2f50b50167e75524045733f3a02dbb\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\b4c63c1fbad9fb26fe60def4384281a7\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\9fa654e6d0dc9f73b7d2655b827de195\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\a6848f77bf7d97f224f90cd2a7adc128\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\7cac2668326057142cdd8456dc7bf4dc\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\2518046fe967e021e5c7633374905178\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\2ad07c8e84c5c46ce88da67bafe8dcaa\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\da781b33604f89a6ee89c1b9b0d97b77\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\f8adc7ecbf2a9db4c59d7a845c74d2fb\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\5c53a9d842126ffb9dfa39598394f507\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\9aa930ae69f7033a45b90b810b4ac7ea\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\94f666a14924c5ffc98ff65457e91f9d\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\b7da2d6fa9c8650c7095a544e6fa0d02\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4e35a37cbbb50f0ddb26de650450d967\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\d11c4dd1c759ebf37ff6eef24c21fbf4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\afef7a3ebb9e53b0ea072697792c1801\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\82f0f43678bb7b8efb628ba9862e43f4\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\6c17817e5a63b47410e5977b1904e603\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\6c95a462473d2fc295de1e62024c03b7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\e155fd7775900454cef5056dd1c8da9b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\22945727ffc874c6b48ebdb85eaf712f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\bababf6819122781de851b2933c4416e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\64bf150e39e694fc6bac7504a56075e9\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\a1c9b4cd4544f0e68b27986192bc67f0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\88e420c6c0bceb2204a8cad5dd4a7321\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\e971052aac412eaec091a4d7a9016176\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\10b242996c21345fd30966296d8fe739\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7943f29639f939a878f66c7f48cada56\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\acebda25512fee7380c15a97b7533e74\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1867f9f6d4c46570a88cfcb8ae92e1b5\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1aeab961626807db7223e80ee543a394\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
+INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
 	package
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:3:5-30
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-43:12
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:1-46:12
 		INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:2:11-69
@@ -51,9 +51,9 @@ ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\Androi
 	android:name
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:8:22-69
 application
-ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:10:5-41:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\97124964b0feea730cb5516a2c3f68ec\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\97124964b0feea730cb5516a2c3f68ec\AndroidManifest.xml:9:5-20
+ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:10:5-44:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\82f0f43678bb7b8efb628ba9862e43f4\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\82f0f43678bb7b8efb628ba9862e43f4\AndroidManifest.xml:9:5-20
 	android:supportsRtl
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:15:9-35
 	android:label
@@ -66,10 +66,10 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Me
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:16:9-40
-activity#ua.nure.nurespy.SingInActivity
+activity#ua.nure.nurespy.SingIn
 ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:17:9-23:20
 	android:name
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:17:19-49
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:17:19-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:18:13-22:29
 action#android.intent.action.MAIN
@@ -80,70 +80,74 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:21:17-77
 	android:name
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:21:27-74
-activity#ua.nure.nurespy.EventActivity
+activity#ua.nure.nurespy.Meet
 ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:24:9-27:59
 	android:label
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:26:13-56
 	android:theme
 		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:27:13-56
 	android:name
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:25:13-42
-activity#ua.nure.nurespy.NavActivity
-ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:33:9-36:59
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:25:13-33
+activity#ua.nure.nurespy.Settings
+ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:28:9-30:63
 	android:label
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:35:13-55
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:30:13-60
+	android:name
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:29:13-37
+activity#ua.nure.nurespy.Chat
+ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:31:9-34:59
+	android:label
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:33:13-56
 	android:theme
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:36:13-56
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:34:13-56
 	android:name
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:34:13-40
-activity#ua.nure.nurespy.SignUpActivity
-ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:37:9-39:62
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:32:13-33
+activity#ua.nure.nurespy.NavActivity
+ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:40:9-43:68
 	android:label
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:39:13-59
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:42:13-55
+	android:theme
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:43:13-56
 	android:name
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:38:13-43
-activity#ua.nure.nurespy.ProfileActivity
-ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:40:9-62
-	android:name
-		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:40:19-50
+		ADDED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml:41:13-40
 uses-sdk
 INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
-MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\6633e7b4973b2a08cd66cfae62b7d516\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\6633e7b4973b2a08cd66cfae62b7d516\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e0ddbe433dd212fa24f2b1ef0bf7eb3c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e0ddbe433dd212fa24f2b1ef0bf7eb3c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\97124964b0feea730cb5516a2c3f68ec\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\97124964b0feea730cb5516a2c3f68ec\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\2a2f50b50167e75524045733f3a02dbb\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\2a2f50b50167e75524045733f3a02dbb\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\b4c63c1fbad9fb26fe60def4384281a7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\b4c63c1fbad9fb26fe60def4384281a7\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\9fa654e6d0dc9f73b7d2655b827de195\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\9fa654e6d0dc9f73b7d2655b827de195\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\a6848f77bf7d97f224f90cd2a7adc128\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\a6848f77bf7d97f224f90cd2a7adc128\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\7cac2668326057142cdd8456dc7bf4dc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\7cac2668326057142cdd8456dc7bf4dc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\2518046fe967e021e5c7633374905178\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\2518046fe967e021e5c7633374905178\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\2ad07c8e84c5c46ce88da67bafe8dcaa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\2ad07c8e84c5c46ce88da67bafe8dcaa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\da781b33604f89a6ee89c1b9b0d97b77\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\da781b33604f89a6ee89c1b9b0d97b77\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\f8adc7ecbf2a9db4c59d7a845c74d2fb\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\f8adc7ecbf2a9db4c59d7a845c74d2fb\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\5c53a9d842126ffb9dfa39598394f507\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\5c53a9d842126ffb9dfa39598394f507\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\9aa930ae69f7033a45b90b810b4ac7ea\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\9aa930ae69f7033a45b90b810b4ac7ea\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\94f666a14924c5ffc98ff65457e91f9d\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\94f666a14924c5ffc98ff65457e91f9d\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\b7da2d6fa9c8650c7095a544e6fa0d02\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\b7da2d6fa9c8650c7095a544e6fa0d02\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4e35a37cbbb50f0ddb26de650450d967\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\4e35a37cbbb50f0ddb26de650450d967\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\d11c4dd1c759ebf37ff6eef24c21fbf4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\d11c4dd1c759ebf37ff6eef24c21fbf4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\afef7a3ebb9e53b0ea072697792c1801\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\afef7a3ebb9e53b0ea072697792c1801\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\82f0f43678bb7b8efb628ba9862e43f4\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\82f0f43678bb7b8efb628ba9862e43f4\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\6c17817e5a63b47410e5977b1904e603\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\6c17817e5a63b47410e5977b1904e603\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\6c95a462473d2fc295de1e62024c03b7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\6c95a462473d2fc295de1e62024c03b7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\e155fd7775900454cef5056dd1c8da9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\e155fd7775900454cef5056dd1c8da9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\22945727ffc874c6b48ebdb85eaf712f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\22945727ffc874c6b48ebdb85eaf712f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\bababf6819122781de851b2933c4416e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\bababf6819122781de851b2933c4416e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\64bf150e39e694fc6bac7504a56075e9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\64bf150e39e694fc6bac7504a56075e9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\a1c9b4cd4544f0e68b27986192bc67f0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\a1c9b4cd4544f0e68b27986192bc67f0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\88e420c6c0bceb2204a8cad5dd4a7321\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\88e420c6c0bceb2204a8cad5dd4a7321\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\e971052aac412eaec091a4d7a9016176\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\e971052aac412eaec091a4d7a9016176\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\10b242996c21345fd30966296d8fe739\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\10b242996c21345fd30966296d8fe739\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7943f29639f939a878f66c7f48cada56\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7943f29639f939a878f66c7f48cada56\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\acebda25512fee7380c15a97b7533e74\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\acebda25512fee7380c15a97b7533e74\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1867f9f6d4c46570a88cfcb8ae92e1b5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1867f9f6d4c46570a88cfcb8ae92e1b5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1aeab961626807db7223e80ee543a394\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Melissa\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\1aeab961626807db7223e80ee543a394\AndroidManifest.xml:20:5-44
 INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\Melissa\Documents\GitHub\NureSPY\NureSPY\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
