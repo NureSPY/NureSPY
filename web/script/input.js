@@ -7,6 +7,8 @@ function IsEmpty(elementId, minLenght){
 }
 
 function CheckData(elementId, minLenght) {
+	minLenght = minLenght ? minLenght : 6;
+
 	if(IsEmpty(elementId, minLenght)){
 		document.getElementById(elementId).style.borderColor = "red";
 		return false;
