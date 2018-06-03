@@ -1,13 +1,11 @@
-body{
-	background-color: rgb(240,240,255);
-}
-
 .info{
 	position: relative;
 	background-color: rgb(255,255,255);
 	height: 350px;
+	width: 80%;
 	border-radius: 20px;
-	margin: 10px 0 0 0;
+	margin: 10px auto 10px auto;
+	overflow: auto;
 }
 
 #startPageHeader{

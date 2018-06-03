@@ -1,0 +1,13 @@
+body{
+	background-color: #E0EEEE;
+}
+
+.footer{
+	height: 40px;
+	width: 80%;
+	margin: 100px auto 20px auto;
+	font-size: 15px;
+	text-align: center;
+	color: grey;
+	cursor: default;
+}
