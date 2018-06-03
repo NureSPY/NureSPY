@@ -1,10 +1,12 @@
 package ua.nure.nurespy;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,16 +17,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
+
+import org.json.JSONObject;
+
+
+import java.net.URISyntaxException;
+
+import android.provider.Settings;
+
+import io.socket.emitter.Emitter;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
 
 public class NavActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog.Builder ad;
+    Button buttonGetLoc;
+    Button buttonDisconnect;
+    Socket socket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         String title = "Searching";
@@ -45,7 +64,7 @@ public class NavActivity extends AppCompatActivity
         ad.setCancelable(true);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +80,106 @@ public class NavActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+//        setContentView(R.layout.app_bar_nav);
+//        buttonGetLoc = findViewById(R.id.buttonGetLoc);
+//        buttonDisconnect = findViewById(R.id.buttonDisconnect);
+//        try {
+//            socket = IO.socket("http://192.168.1.102:3000");
+//        } catch (URISyntaxException ex) {
+//            ex.printStackTrace();
+//        }
+//        //double lt, ln;
+//        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+//        buttonGetLoc.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                GPStracker gpsTracker = new GPStracker(getApplicationContext());
+//                Location location = gpsTracker.getLocation();
+//                double lat, lng;
+//                if (location != null) {
+//                    lat = location.getLatitude();
+//                    lng = location.getLongitude();
+//
+//                    Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(NavActivity.this, "location = null", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//        buttonDisconnect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                socket.disconnect();
+//
+//            }
+//        });
+//
+//
+//        socket.open();
+//        // JSONObject obj = new JSONObject();
+//
+//        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+//            @Override
+//            public void call(Object... args) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//            }
+//        }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+//
+//            @Override
+//            public void call(Object... args) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "Error connect", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+//            @Override
+//            public void call(Object... args) {
+//                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+//            }
+//        }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
+//            @Override
+//            public void call(Object... args) {
+//
+//            }
+//        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+//            @Override
+//            public void call(Object... args) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "You`ve disconnected!", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//            }
+//        });
+//        socket.connect();
+//        if (socket.connected()) {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        } else {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }
     }
 
     @Override

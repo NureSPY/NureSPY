@@ -38,14 +38,14 @@
         android:id="@+id/nav_meet"
         android:icon="@android:drawable/ic_popup_reminder"
         android:title="Мероприятия" />
-    <item
-        android:id="@+id/nav_chat"
-        android:icon="@android:drawable/ic_dialog_email"
-        android:title="Чаты" />
-    <!--  <item
-          android:id="@+id/nav_smth"
-          android:icon="@android:drawable/ic_menu_recent_history"
-          android:title="Что-то еще" />   -->
+        <!--  <item
+            android:id="@+id/nav_chat"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="Чаты" /> -->
+        <!--  <item
+              android:id="@+id/nav_smth"
+              android:icon="@android:drawable/ic_menu_recent_history"
+              android:title="Что-то еще" />   -->
     <item
         android:id="@+id/nav_settings"
         android:icon="@android:drawable/ic_menu_manage"

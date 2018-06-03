@@ -1,4 +1,4 @@
-#Wed Apr 18 02:05:43 EEST 2018
-base.0=C\:\\Users\\Melissa\\AndroidStudioProjects\\NureSPY\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
+#Sun Jun 03 23:02:17 EEST 2018
+base.0=C\:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
 path.0=classes.dex
 renamed.0=classes.dex

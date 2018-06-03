@@ -68,10 +68,10 @@ public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_in);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView =  findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView =  findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -83,24 +83,22 @@ public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.buttonSign);
+        Button mEmailSignInButton = findViewById(R.id.buttonSign);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+               // attemptLogin();
 
-                Intent intent = new Intent(SingIn.this, NavActivity.class);
+                Intent intent = new Intent(SingIn.this, MapsActivity.class);
                 startActivity(intent);
 
             }
         });
 
-        Button buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+        Button buttonSignUp =  findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
-
                 Intent intent = new Intent(SingIn.this, SignUpActivity.class);
                 startActivity(intent);
 

@@ -20,7 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_nav" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_nav" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -30,5 +32,21 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/buttonGetLoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GetLoc"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="left|center" />
+
+    <Button
+        android:id="@+id/buttonDisconnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnect"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="left|bottom" />
 
 </android.support.design.widget.CoordinatorLayout>
