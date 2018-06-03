@@ -2,7 +2,10 @@
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
-	height: 60%;
+	height: 250px;
+	width: 250px;
+	border: 2px solid blue;
+	border-radius: 50%;
 }
 
 .info p{
