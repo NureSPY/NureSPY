@@ -1,42 +1,34 @@
 .info{
-	position: relative;
 	background-color: rgb(255,255,255);
-	height: 350px;
-	width: 80%;
-	border-radius: 20px;
-	margin: 10px auto 10px auto;
-	overflow: auto;
 }
 
-#startPageHeader{
+img#startPageHeader{
 	width: 100%;
 	border-radius: 20px;
 }
 
-#arrowLeft{
-	height: 20%;
+img#arrowLeft, img#arrowRight{
 	position: absolute;
+	height: 20%;
+	top: 50%;
+	transform: translate(0, -50%);
+	cursor: pointer;
+}
+
+img#arrowLeft{
 	left: 25%;
-	top: 50%;
-	transform: translate(0, -50%);
-	cursor: pointer;
 }
 
-#arrowRight{
-	height: 20%;
-	position: absolute;
+img#arrowRight{
 	right: 25%;
-	top: 50%;
-	transform: translate(0, -50%);
-	cursor: pointer;
 }
 
-#info{
-	height: 90%;
-	border-radius: 10px;
+img#slides{
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	height: 90%;
+	border-radius: 10px;
 	transform: translate(-50%, -50%);
 }
 
