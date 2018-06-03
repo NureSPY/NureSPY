@@ -4,45 +4,52 @@
 	<meta charset="utf-8">
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
 	<link rel="stylesheet" href="style/signIn.css">
+	<link rel="stylesheet" href="style/signUp.css">
+	<link rel="stylesheet" href="style/common.css">
 	<script type="text/javascript" src="script/signUp.js"></script>
 	<script type="text/javascript" src="script/input.js"></script>
     <title>Sign Up</title>
 </head>
 <body>
-	<div id="header">
+	<div class="info">
 		<img src="images/logo.png">
 		<p><b>Nure SPY</b></p>
 	</div>
-	<form method="POST">
-		<table>
-			<tr>
-				<td>Name</td>
-				<td><input id="name" type="text" name="name"></td>
-			</tr>
-			<tr>
-				<td>Login</td>
-				<td><input id="login" type="text" name="login"></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><input id="email" type="text" name="email"></td>
-			</tr>
-			<tr>
-				<td>Group</td>
-				<td><input id="group" type="text" name="group"></td>
-			</tr>			
-			<tr>
-				<td>Password</td>
-				<td><input id="password" type="password" name="password"></td>
-			</tr>
-			<tr>
-				<td>Repeat password</td>
-				<td><input id="repeat" type="password" name="repeat"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="button" onclick="SignUp()" name="signUp" value="Sign Up"></td>
-			</tr>
-		</table>
-	</form>
+	<div class="form">
+		<form method="POST">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td><input id="name" type="text" name="name"></td>
+				</tr>
+				<tr>
+					<td>Login</td>
+					<td><input id="login" type="text" name="login"></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input id="email" type="text" name="email"></td>
+				</tr>
+				<tr>
+					<td>Group</td>
+					<td><input id="group" type="text" name="group"></td>
+				</tr>			
+				<tr>
+					<td>Password</td>
+					<td><input id="password" type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td>Repeat password</td>
+					<td><input id="repeat" type="password" name="repeat"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="button" onclick="SignUp()" name="signUp" value="Sign Up"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="footer">
+        <p>&#169 NureSPY, Inc.</p>
+    </div>
 </body>
 </html>
