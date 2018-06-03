@@ -1,0 +1,76 @@
+body{
+	background-color: rgb(240,240,255);
+}
+
+.info{
+	position: relative;
+	background-color: rgb(255,255,255);
+	height: 350px;
+	border-radius: 20px;
+	margin: 10px 0 0 0;
+}
+
+#startPageHeader{
+	width: 100%;
+	border-radius: 20px;
+}
+
+#arrowLeft{
+	height: 20%;
+	position: absolute;
+	left: 25%;
+	top: 50%;
+	transform: translate(0, -50%);
+	cursor: pointer;
+}
+
+#arrowRight{
+	height: 20%;
+	position: absolute;
+	right: 25%;
+	top: 50%;
+	transform: translate(0, -50%);
+	cursor: pointer;
+}
+
+#info{
+	height: 90%;
+	border-radius: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+button{
+	height: 50px;
+	width: 250px;
+	font-size: 20px;
+	margin: 10px 0 0 0;
+	border-radius: 20px;
+	position: relative;
+	left:50%;
+	transform: translate(-50%, 0);
+	cursor: pointer;
+}
+
+button#signIn{
+	background-color: rgb(0,42,255);
+	border-width:0px;
+	color: rgb(255,255,255);
+}
+
+button#signUp{
+	width: 200px;
+	background-color: rgb(255,255,255);
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(0,42,255);
+	font-size: 15px;
+}
+
+
+
+
+
+
