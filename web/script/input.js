@@ -19,7 +19,7 @@ function SignUp() {
 		alert("Sign Up!");
 }
 
-function SignIn(argument) {
+function SignIn() {
 	var login = CheckData("login");
 	var password = CheckData("password");
 
@@ -30,7 +30,7 @@ function SignIn(argument) {
 		alert("Sign In!");
 }
 
-function Restore(argument) {
+function Restore() {
 	if(CheckData("email", 10))
 		alert("Message with password sent!");
 }
