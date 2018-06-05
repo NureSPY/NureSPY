@@ -1,63 +1,73 @@
-.info{
-	background-color: rgb(255,255,255);
+.header{
+	margin: 2% auto 10% auto;
+	width: 100%;
+	height: 180px;
+	background-color: black;
+	padding: 1px 0 0 0;
 }
 
-img#startPageHeader{
+.header img{
+	display: block;
+	width: 80%;
+	height: 80%;
+	margin: auto;
+}
+
+.info{
+	position: absolute;
+	background-color: black;
 	width: 100%;
-	border-radius: 20px;
+	height: 80%;	
+	top: 70%;
+}
+
+#slider{
+	position: inherit;
+	height: 90%;
+	width: 50%;
+	left: 25%;
+	top: 3%;
+}
+
+.slide{
+	position: inherit;
+	transition: opacity 0.6s ease-out;
+	height: 100%;
+	width: 100%;
 }
 
 img#arrowLeft, img#arrowRight{
 	position: absolute;
-	height: 20%;
+	height: 15%;
 	top: 50%;
 	transform: translate(0, -50%);
 	cursor: pointer;
 }
 
 img#arrowLeft{
-	left: 5%;
+	left: 15%;
 }
 
 img#arrowRight{
-	right: 5%;
+	right: 15%;
 }
 
-#slider img{
+.collection{
 	position: absolute;
+	width: 25%;
+	border-width: 0px;
 	left: 50%;
-	top: 50%;
-	height: 80%;
-	border-radius: 10px;
-	transform: translate(-50%, -50%);
-	transition: opacity .5s ease-out;
-}
-
-button{
-	height: 50px;
-	width: 250px;
-	font-size: 20px;
-	margin: 10px 0 0 0;
-	border-radius: 20px;
-	position: relative;
-	left:50%;
+	top: 152%;
 	transform: translate(-50%, 0);
-	cursor: pointer;
+	text-align: center;
 }
 
-button#signIn{
-	background-color: rgb(0,42,255);
-	border-width:0px;
-	color: rgb(255,255,255);
+h1{
+	display: block;
+	color: white;
+	text-align: center;
 }
 
-button#signUp{
-	background-color: rgb(255,255,255);
-	border-width: 2px;
-	border-style: solid;
-	border-color: rgb(0,42,255);
-	font-size: 15px;
-}
 
 
 

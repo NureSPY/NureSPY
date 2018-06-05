@@ -3,32 +3,34 @@
 <head>
 	<meta charset="utf-8">
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
-	<link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/materialize.css">
     <link rel="stylesheet" href="style/common.css">
+	<link rel="stylesheet" href="style/index.css">
     <title>Nure SPY</title>
 </head>
 <body>
-    <div>
-    	<img id="startPageHeader" src="images/index/header.png">
+    <div class="header сard-panel hoverable">
+    	<!-- <img src="images/index/header.png"> -->
+        <h1>Nure SPY</h1>
     </div>
-    <div class="info">
+
+    <div class="info сard-panel hoverable">
         <div id="slider">
-            <img src="images/index/slide1.png" style="opacity: 1">
-            <img src="images/index/slide2.png" style="opacity: 0">
-            <img src="images/index/slide3.png" style="opacity: 0">
+            <img class="slide responsive-img" src="images/index/slide1.png" style="opacity: 1">
+            <img class="slide responsive-img" src="images/index/slide2.png" style="opacity: 0">
+            <img class="slide responsive-img" src="images/index/slide3.png" style="opacity: 0">
         </div>
     	<img id="arrowLeft" onclick="clickArrowLeft()" src="images/index/arrowLeft.png">
     	<img id="arrowRight" onclick="clickArrowRight()" src="images/index/arrowRight.png">
     </div>
-    <div>
-    	<a href="signIn.html"><button id="signIn"><b>Sign In</b></button></a>
-   	</div>
-    <div>
-     	<a href="signUp.html"><button id="signUp"><b>Sign Up</b></button></a>
+
+    <div class="collection">
+        <a href="signIn.html" class="collection-item active blue darken-3" >Log in</a>
+        <a href="signUp.html" class="collection-item">Create account</a>
     </div>
-    <div class="footer">
-        <p>&#169 NureSPY, Inc.</p>
-    </div>
-    <script type="text/javascript" src="script/index.js"></script>
 </body>
+<footer class="footer-copyright blue darken-4">
+    <p>&#169 NureSPY, Inc.</p>
+    <script type="text/javascript" src="script/index.js"></script>
+</footer>
 </html>
