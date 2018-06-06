@@ -1,45 +1,36 @@
-body{
-	background-color: rgb(240,240,255);
-}
-
 .info{
-	position: relative;
 	background-color: rgb(255,255,255);
-	height: 350px;
-	border-radius: 20px;
-	margin: 10px 0 0 0;
 }
 
-#startPageHeader{
+img#startPageHeader{
 	width: 100%;
 	border-radius: 20px;
 }
 
-#arrowLeft{
-	height: 20%;
+img#arrowLeft, img#arrowRight{
 	position: absolute;
-	left: 25%;
+	height: 20%;
 	top: 50%;
 	transform: translate(0, -50%);
 	cursor: pointer;
 }
 
-#arrowRight{
-	height: 20%;
-	position: absolute;
-	right: 25%;
-	top: 50%;
-	transform: translate(0, -50%);
-	cursor: pointer;
+img#arrowLeft{
+	left: 5%;
 }
 
-#info{
-	height: 90%;
-	border-radius: 10px;
+img#arrowRight{
+	right: 5%;
+}
+
+#slider img{
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	height: 80%;
+	border-radius: 10px;
 	transform: translate(-50%, -50%);
+	transition: opacity .5s ease-out;
 }
 
 button{
@@ -61,7 +52,6 @@ button#signIn{
 }
 
 button#signUp{
-	width: 200px;
 	background-color: rgb(255,255,255);
 	border-width: 2px;
 	border-style: solid;

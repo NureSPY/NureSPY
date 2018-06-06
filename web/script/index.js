@@ -1,11 +1,17 @@
+const images = [...document.getElementById("slider").children];
+let index = 0;
+
 function clickArrowLeft() {
-	var currentSrc = document.images["info"].src;
-	var index = parseInt(currentSrc.charAt(currentSrc.length - 5));
-	document.images["info"].src = "images/index/info" + (index == 1 ? 3 : --index) + ".png";
+	index = index == 0 ? 2 : --index;
+	rerenderSlider();
 }
 
 function clickArrowRight() {
-	var currentSrc = document.images["info"].src;
-	var index = parseInt(currentSrc.charAt(currentSrc.length - 5));
-	document.images["info"].src = "images/index/info" + (index == 3 ? 1 : ++index) + ".png";
+	index = index == 2 ? 0 : ++index;
+	rerenderSlider();
+}
+
+function rerenderSlider() {
+	images.forEach(image => image.style.opacity = 0);
+	images[index].style.opacity = 1;
 }
