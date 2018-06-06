@@ -43,6 +43,9 @@ td p{
 	color: white;
 	cursor: default;
 }
+td{
+	width: 50%;
+}
 
 tr{
 	border: none;
