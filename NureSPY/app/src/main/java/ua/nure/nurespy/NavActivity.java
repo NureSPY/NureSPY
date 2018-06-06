@@ -83,8 +83,9 @@ public class NavActivity extends AppCompatActivity
 
 
 //        setContentView(R.layout.app_bar_nav);
-//        buttonGetLoc = findViewById(R.id.buttonGetLoc);
-//        buttonDisconnect = findViewById(R.id.buttonDisconnect);
+     buttonGetLoc = findViewById(R.id.buttonGetLoc);
+     ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        buttonDisconnect = findViewById(R.id.buttonDisconnect);
 //        try {
 //            socket = IO.socket("http://192.168.1.102:3000");
 //        } catch (URISyntaxException ex) {
@@ -92,10 +93,27 @@ public class NavActivity extends AppCompatActivity
 //        }
 //        //double lt, ln;
 //        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        buttonGetLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
+//                Location location = gpsTracker.getLocation();
+//                double lat, lng;
+//                if (location != null) {
+//                    lat = location.getLatitude();
+//                    lng = location.getLongitude();
+//
+//                    Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(NavActivity.this, "location = null", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+        });
 //        buttonGetLoc.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                GPStracker gpsTracker = new GPStracker(getApplicationContext());
+//                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
 //                Location location = gpsTracker.getLocation();
 //                double lat, lng;
 //                if (location != null) {

@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-public class GPStracker implements LocationListener{
+public class GPSTracker implements LocationListener{
     Context context;
-    public GPStracker(Context c){
+    public GPSTracker(Context c){
         context = c;
     }
     public Location getLocation(){
@@ -24,8 +24,8 @@ public class GPStracker implements LocationListener{
         boolean isGPSEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(isGPSEnabled){
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,6000, 10, this);
-            Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            return loc;
+            Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            return l;
         }else{
             Toast.makeText(context, "Pls enable GPS", Toast.LENGTH_LONG).show();
         }

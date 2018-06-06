@@ -1,10 +1,12 @@
 package ua.nure.nurespy;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,6 +34,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         Button btnTest =  findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
@@ -40,8 +43,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Add a marker in Sydney and move the camera
                 // mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
                // mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 LatLng sydney = new LatLng(50.015116, 36.228182);
-                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in "));
+               //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in "));
                 // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12.0f));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,17f));
 
@@ -58,6 +62,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                .image(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher))
 //                .position(new LatLng(50.015190, 36.227385),239f, 200.5f);
 //        mMap.addGroundOverlay(marker1);
+
+                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
+                Location location = gpsTracker.getLocation();
+                double lat, lng;
+                if (location != null) {
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                    marker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(lat, lng))
+                            .title("Melissa")
+                            .snippet("mariia.kryvoruchko@nure.ua"));
+                    //Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MapsActivity.this, "location = null", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

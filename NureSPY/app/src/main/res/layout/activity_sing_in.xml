@@ -83,10 +83,10 @@
                 android:id="@+id/buttonSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/panelBackground"
                 android:text="Sign up"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="normal|italic"
-                tools:background="?android:attr/textColorHintInverse"
                 tools:layout_height="match_parent" />
 
         </LinearLayout>

@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             @Override
             public void onClick(View view) {
                 //attemptLogin();
-                Intent intent = new Intent(SignUpActivity.this, MapsActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, NavActivity.class);
                 startActivity(intent);
             }
         });
