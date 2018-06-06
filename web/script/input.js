@@ -47,11 +47,11 @@ function CheckData(elementId, minLenght) {
 	minLenght = minLenght ? minLenght : 6;
 
 	if(IsEmpty(elementId, minLenght)){
-		document.getElementById(elementId).style.borderColor = "red";
+		document.getElementById(elementId).style.boxShadow = "0 0 20px red";
 		return false;
 	}
 	else{
-		document.getElementById(elementId).style.borderColor = "black";
+		document.getElementById(elementId).style.boxShadow = "none";
 		return true;
 	}
 }
