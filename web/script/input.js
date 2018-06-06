@@ -15,8 +15,10 @@ function SignUp() {
 		document.getElementById("repeat").value = "";
 	}
 
-	if(name && login && email && group && password)
+	if(name && login && email && group && password){
 		alert("Sign Up!");
+		window.location.href = "map.html"
+	}
 }
 
 function SignIn() {
@@ -26,13 +28,17 @@ function SignIn() {
 	if(!password)
 		document.getElementById("password").value = "";
 	
-	if(login && password)
+	if(login && password){
 		alert("Sign In!");
+		window.location.href = "map.html"
+	}
 }
 
 function Restore() {
-	if(CheckData("email", 10))
+	if(CheckData("email", 10)){
 		alert("Message with password sent!");
+		window.location.href = "signIn.html"
+	}
 }
 
 function IsEmpty(elementId, minLenght){
