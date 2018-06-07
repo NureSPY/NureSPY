@@ -1,0 +1,21 @@
+{
+  "name": "nurespy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "core.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "json": "^9.0.6",
+    "mysql": "^2.15.0",
+    "npm": "^6.1.0",
+    "socket.io": "^2.1.1",
+    "ws": "^5.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC"
+}
