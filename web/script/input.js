@@ -1,3 +1,5 @@
+const socket = io('http://localhost:3306');
+
 function SignUp() {
 	var name = CheckData("name", 6);
 	var login = CheckData("login", 6);
@@ -16,8 +18,11 @@ function SignUp() {
 	}
 
 	if(name && login && email && group && password){
-		alert("Sign Up!");
-		window.location.href = "map.html"
+		socket.emit('signUp', { name:name, login:login, email:email, group:group, password:password });
+		if(!socket.error)
+			window.location.href = "map.html";
+		else
+			alert("Error!");	
 	}
 }
 
@@ -29,15 +34,19 @@ function SignIn() {
 		document.getElementById("password").value = "";
 	
 	if(login && password){
-		alert("Sign In!");
-		window.location.href = "map.html"
+		socket.emit('signIn', {login:login, password:password});
+		if(!socket.error)
+			window.location.href = "map.html";
+		else
+			alert("User is not found!");
 	}
 }
 
 function Restore() {
 	if(CheckData("email", 10)){
 		alert("Message with password sent!");
-		window.location.href = "signIn.html"
+		socket.emit('restorePassword', {email:email});
+		window.location.href = "signIn.html";
 	}
 }
 
@@ -58,7 +67,7 @@ function CheckData(elementId, minLenght) {
 	}
 	else{
 		document.getElementById(elementId).style.boxShadow = "none";
-		return true;
+		return document.getElementById(elementId).value;
 	}
 }
 
