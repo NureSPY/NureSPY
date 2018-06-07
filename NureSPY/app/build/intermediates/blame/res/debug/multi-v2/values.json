@@ -6,9 +6,11 @@
                 {
                     "source": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\src\\main\\res\\values\\colors.xml",
                     "from": {
-                        "startLines": "-1,-1,-1",
-                        "startColumns": "-1,-1,-1",
-                        "startOffsets": "-1,-1,-1"
+                        "startLines": "-1,-1,3",
+                        "startColumns": "-1,-1,4",
+                        "startOffsets": "-1,-1,105",
+                        "endColumns": "-1,-1,50",
+                        "endOffsets": "-1,-1,151"
                     },
                     "to": {
                         "startLines": "190,191,192",
@@ -114,11 +116,9 @@
                 {
                     "source": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\src\\debug\\res\\values\\google_maps_api.xml",
                     "from": {
-                        "startLines": "22",
-                        "startColumns": "4",
-                        "startOffsets": "905",
-                        "endColumns": "137",
-                        "endOffsets": "1038"
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
                     },
                     "to": {
                         "startLines": "928",

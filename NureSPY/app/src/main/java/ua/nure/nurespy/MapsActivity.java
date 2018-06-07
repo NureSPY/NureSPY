@@ -1,7 +1,8 @@
 package ua.nure.nurespy;
 
-import android.content.Intent;
+import android.Manifest;
 import android.location.Location;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,66 +21,24 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    private GoogleMap map;
     Marker marker;
 
+    GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},123);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        Button btnTest =  findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Add a marker in Sydney and move the camera
-                // mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
-               // mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                LatLng sydney = new LatLng(50.015116, 36.228182);
-               //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in "));
-                // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12.0f));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,17f));
-
-                GroundOverlayOptions newarkMap = new GroundOverlayOptions()
-                        .image(BitmapDescriptorFactory.fromResource(R.drawable.tmp_map_background))
-                        .position(sydney, 239f, 200.5f);
-                mMap.addGroundOverlay(newarkMap);
-
-                marker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(50.015190, 36.227385))
-                        .title("Melissa")
-                        .snippet("mariia.kryvoruchko@nure.ua"));
-//        GroundOverlayOptions marker1 = new GroundOverlayOptions()
-//                .image(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher))
-//                .position(new LatLng(50.015190, 36.227385),239f, 200.5f);
-//        mMap.addGroundOverlay(marker1);
-
-                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
-                Location location = gpsTracker.getLocation();
-                double lat, lng;
-                if (location != null) {
-                    lat = location.getLatitude();
-                    lng = location.getLongitude();
-                    marker = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(lat, lng))
-                            .title("Melissa")
-                            .snippet("mariia.kryvoruchko@nure.ua"));
-                    //Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(MapsActivity.this, "location = null", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
     }
 
 
@@ -94,13 +53,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map = googleMap;
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
 //        // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        // Add a marker in Sydney and move the camera
+        // map.setMapType(GoogleMap.MAP_TYPE_NONE);
+        // map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        LatLng sydney = new LatLng(50.015116, 36.228182);
+        //map.addMarker(new MarkerOptions().position(sydney).title("Marker in "));
+
+        //   map.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,17f));
+
+        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.tmp_map_background))
+                .position(sydney, 239f, 200.5f);
+        map.addGroundOverlay(newarkMap);
+
+        marker = map.addMarker(new MarkerOptions()
+                .position(new LatLng(50.015190, 36.227385))
+                .title("User")
+                .snippet("user@nure.ua"));
+//        GroundOverlayOptions marker1 = new GroundOverlayOptions()
+//                .image(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher))
+//                .position(new LatLng(50.015190, 36.227385),239f, 200.5f);
+//        map.addGroundOverlay(marker1);
+
+        gps = new GPSTracker(getApplicationContext());
+        Location location = gps.getLocation();
+        double lat, lng;
+        if (location != null) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+            LatLng point = new LatLng(lat, lng);
+            marker = map.addMarker(new MarkerOptions()
+                    .position(point)
+                    .title("Melissa")
+                    .snippet("mariia.kryvoruchko@nure.ua"));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(point,17f));
+            //Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MapsActivity.this, "location = null", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -109,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
 //                .image(BitmapDescriptorFactory.fromResource(R.drawable.tmp_map_background))
 //                .position(new LatLng(0, 0), 500000f, 500000f);
-//        mMap.addGroundOverlay(newarkMap);
+//        map.addGroundOverlay(newarkMap);
 //    }
 }
 

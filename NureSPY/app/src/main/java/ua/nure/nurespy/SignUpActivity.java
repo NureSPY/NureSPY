@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -27,9 +28,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.AsyncTask;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +49,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+
+    //MyTask mt;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -63,6 +74,9 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private View mProgressView;
     private View mLoginFormView;
 
+    //    final EditText email = (EditText)findViewById(R.id.email);
+//    final EditText password = (EditText)findViewById(R.id.password);
+    //  final EditText password2 = (EditText)findViewById(R.id.password2);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +97,35 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+
+
+        Switch studSwitch = findViewById(R.id.switch3);
+        studSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            boolean checked = false;
+            TextInputLayout group = findViewById(R.id.group);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checked == false) {
+                    checked = true;
+                } else {
+                    checked = false;
+                }
+                if (checked == true) {
+                    group.setVisibility(View.VISIBLE);
+                }
+                if (checked == false) {
+                    group.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
+        Button signUpButton = (Button) findViewById(R.id.sign_up_btn);
+        signUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                //  mt = new MyTask();
+                // mt.execute();
+
                 //attemptLogin();
                 Intent intent = new Intent(SignUpActivity.this, NavActivity.class);
                 startActivity(intent);
@@ -293,6 +332,38 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
+
+//    public class MyTask extends AsyncTask<Void, Integer, String> {
+//        // 3 параметр это тип возвращаемых данных методом doInBackground, его я буду обрабатывать в onPostExecute
+//        // фоновая работа
+//        @Override
+////        protected String doInBackground(Void... params) {
+////            try {
+////               // return SendServer.sendRegData(""+email.getText().toString()+"",""+ password.getText().toString()+"");
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////                return e.toString();
+////            }
+////        }
+//        // выполняется после doInBackground, имеет доступ к UI
+//        protected void onPostExecute(String result) {
+//            JSONObject object = null;
+//            try {
+//                object = new JSONObject(result);
+//            } catch (JSONException e1) {
+//                e1.printStackTrace();
+//            }
+//            try {
+//                String status = object.getString("status");
+//            } catch (JSONException e1) {
+//                e1.printStackTrace();
+//            }
+//        }
+//
+//
+//
+//    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -348,6 +419,15 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             mAuthTask = null;
             showProgress(false);
         }
+
+//socket.emit('signUp', {fullname: 'Eugene', login: 'anime', password: '123456', mail: 'eugene@nure.ua'});
+//
+//
+//  socket.on('signUp', res =>{
+//            document.writeln(`Sign Up code = ${res.err}`)
+//        })
+
+
     }
 }
 

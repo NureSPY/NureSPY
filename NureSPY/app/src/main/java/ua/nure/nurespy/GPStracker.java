@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
@@ -16,7 +17,9 @@ public class GPSTracker implements LocationListener{
         context = c;
     }
     public Location getLocation(){
-        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+      //  ActivityCompat.requestPermissions(MapsActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+
+        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             Toast.makeText(context, "Permission is not granted", Toast.LENGTH_SHORT).show();
             return null;
         }

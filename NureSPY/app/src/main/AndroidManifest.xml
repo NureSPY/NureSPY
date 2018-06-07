@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SingIn">
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Meet"
+            android:name=".EventActivity"
             android:label="@string/title_activity_meet"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -33,7 +33,7 @@
             android:label="@string/title_activity_settings" />
         <!--
             <activity
-            android:name=".SingIn"
+            android:name=".SignInActivity"
             android:label="@string/title_activity_sing_in"></activity>
         -->
         <activity

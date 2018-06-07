@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SingIn">
+    tools:context=".SignInActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -86,7 +86,7 @@
                 android:background="?android:attr/panelBackground"
                 android:text="Sign up"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="normal|italic"
+                android:textStyle="italic"
                 tools:layout_height="match_parent" />
 
         </LinearLayout>

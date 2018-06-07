@@ -3,7 +3,6 @@ package ua.nure.nurespy;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -18,22 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
-import org.json.JSONObject;
-
-
-import java.net.URISyntaxException;
 
 import android.provider.Settings;
 
-import io.socket.emitter.Emitter;
-import io.socket.client.IO;
 import io.socket.client.Socket;
 
 
-public class NavActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog.Builder ad;
     Button buttonGetLoc;
     Button buttonDisconnect;
@@ -41,7 +32,12 @@ public class NavActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},123);
+
         setContentView(R.layout.activity_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,19 +68,18 @@ public class NavActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
 //        setContentView(R.layout.app_bar_nav);
-     buttonGetLoc = findViewById(R.id.buttonGetLoc);
-     ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        buttonGetLoc = findViewById(R.id.buttonGetLoc);
         buttonDisconnect = findViewById(R.id.buttonDisconnect);
 //        try {
 //            socket = IO.socket("http://192.168.1.102:3000");
@@ -110,99 +105,12 @@ public class NavActivity extends AppCompatActivity
             }
 
         });
-//        buttonGetLoc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
-//                Location location = gpsTracker.getLocation();
-//                double lat, lng;
-//                if (location != null) {
-//                    lat = location.getLatitude();
-//                    lng = location.getLongitude();
-//
-//                    Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(NavActivity.this, "location = null", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        buttonDisconnect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                socket.disconnect();
-//
-//            }
-//        });
-//
-//
-//        socket.open();
-//        // JSONObject obj = new JSONObject();
-//
-//        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//            }
-//        }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
-//
-//            @Override
-//            public void call(Object... args) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "Error connect", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//        }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-//            }
-//        }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//
-//            }
-//        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "You`ve disconnected!", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//            }
-//        });
-//        socket.connect();
-//        if (socket.connected()) {
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }
+
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -239,15 +147,16 @@ public class NavActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_meet) {
-            Intent intent = new Intent(NavActivity.this, Meet.class);
+            Intent intent = new Intent(NavActivity.this, EventActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(NavActivity.this, Settings.class);
             startActivity(intent);
-        } /*else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_maps) {
+            Intent intent = new Intent(NavActivity.this, MapsActivity.class);
+            startActivity(intent);
+        }/* else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 

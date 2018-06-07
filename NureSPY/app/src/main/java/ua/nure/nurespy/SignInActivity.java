@@ -33,13 +33,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.Socket;
+
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+public class SignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    Button mEmailSignInButton;
+    Socket socket;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -66,12 +70,12 @@ public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_in);
+        setContentView(R.layout.activity_sign_in);
         // Set up the login form.
-        mEmailView =  findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView =  findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -80,26 +84,92 @@ public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
                     return true;
                 }
                 return false;
+
+
+//                socket.emit('signIn', {login: 'maria', password: '123456'});
+//
+//                socket.on('signIn', res =>{
+//                        document.writeln(res.err);
+//  });
             }
         });
 
-        Button mEmailSignInButton = findViewById(R.id.buttonSign);
+        mEmailSignInButton = findViewById(R.id.buttonSign);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-               // attemptLogin();
+                // attemptLogin();
 
-                Intent intent = new Intent(SingIn.this, MapsActivity.class);
+                Intent intent = new Intent(SignInActivity.this, NavActivity.class);
                 startActivity(intent);
+//                try {
+//                    socket = IO.socket("http://178.165.46.109:3000");
+//                } catch (URISyntaxException ex) {
+//                    ex.printStackTrace();
+//                }
 
+
+                //socket.open();
+                // boolean connect = false;
+//                JSONObject obj = new JSONObject();
+//
+//                socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+//                    @Override
+//                    public void call(Object... args) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//
+//                    }
+//                }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+//
+//                    @Override
+//                    public void call(Object... args) {
+//                        Toast.makeText(getApplicationContext(), "Error sign in", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+//                    @Override
+//                    public void call(Object... args) {
+//                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                socket.connect();
+//                if (socket.connected()) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                } else {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                }
+
+
+                //   boolean isConnected =  socket.connected();
+           /* if(connect){
+                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(getApplicationContext(), "Try again! Masha off server!", Toast.LENGTH_SHORT).show();
+
+            }*/
             }
         });
 
-        Button buttonSignUp =  findViewById(R.id.buttonSignUp);
+        Button buttonSignUp = findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SingIn.this, SignUpActivity.class);
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
 
             }
@@ -288,7 +358,7 @@ public class SingIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(SingIn.this,
+                new ArrayAdapter<>(SignInActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);

@@ -34,10 +34,14 @@
                 android:title="Send" />
         </menu>
     </item>-->
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="Map" />
     <item
         android:id="@+id/nav_meet"
         android:icon="@android:drawable/ic_popup_reminder"
-        android:title="Мероприятия" />
+        android:title="Event" />
         <!--  <item
             android:id="@+id/nav_chat"
             android:icon="@android:drawable/ic_dialog_email"
@@ -49,7 +53,7 @@
     <item
         android:id="@+id/nav_settings"
         android:icon="@android:drawable/ic_menu_manage"
-        android:title="Настройки" />
+        android:title="Settings" />
     </group>
 
 </menu>
