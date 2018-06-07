@@ -3,10 +3,9 @@
 <head>
 	<meta charset="utf-8">
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style/materialize.css">
 	<link rel="stylesheet" href="style/startPages.css">
-	<link rel="stylesheet" href="style/signIn.css">
 	<link rel="stylesheet" href="style/common.css">
-	<script type="text/javascript" src="script/input.js"></script>
     <title>Sign In</title>
 </head>
 <body>
@@ -14,31 +13,31 @@
 		<img src="images/logo.png">
 		<p><b>Nure SPY</b></p>
 	</div>
+
 	<div class="form">
-		<form method="POST">
-			<table>
-				<tr>
-					<td>Login</td>
-					<td><input type="text" id="login" name="login"></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" id="password" name="password"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="button" onclick="SignIn()" name="signIn" value="Sign In"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><a href="restorePassword.html"><b>Forgot password?</b></a></td>
-				</tr>
-				<tr>
-					<td colspan="2"><a href="signUp.html"><b>Sign Up</b></a></td>
-				</tr>
-			</table>
-		</form>
+		<table class="centered">
+			<tr>
+				<td><p class="right-align">Login</p></td>
+				<td><input type="text" id="login" name="login"></td>
+			</tr>
+			<tr>
+				<td><p class="right-align">Password</p></td>
+				<td><input type="password" id="password" name="password"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" onclick="SignIn()" value="Sign In"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><a href="restorePassword.html"><b>Forgot password?</b></a></td>
+			</tr>
+			<tr>
+				<td colspan="2"><a href="signUp.html"><b>Sign Up</b></a></td>
+			</tr>
+		</table>
 	</div>
-	<div class="footer">
-        <p>&#169 NureSPY, Inc.</p>
-    </div>
 </body>
+<footer class="footer-copyright">
+    <p>&#169 NureSPY, Inc.</p>
+	<script type="text/javascript" src="script/input.js"></script>
+</footer>
 </html>

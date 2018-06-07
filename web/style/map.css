@@ -1,0 +1,73 @@
+.header{
+	height: 100px;
+	width: 100%;
+	margin: 50px 0 0 0;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.header #logo{
+	height: 80%;
+	width: auto;
+	border: 2px solid #000040;
+	border-radius: 50%;
+	box-shadow: 0 0 20px 10px #000040;
+	margin: 10px 50px 10px 50px;
+	display: inline-block;
+	float: left;
+}
+
+.header .buttons{
+	width: 60%;
+	height: 100%;
+	margin: 0 auto 0 auto;
+	display: inline-block;
+	float: left;
+	text-align: center;
+}
+
+.header .buttons input[type=button]{
+	height: 100%;
+	width: 20%;
+	border: none;
+	background-color: transparent;
+	color: white;
+	font-size: 30px;
+}
+
+.header .buttons input[type=button]:hover{
+	background-color: #000040;
+	box-shadow: 0 0 0 10px #000040;
+}
+
+.header .buttons input[type=button].current{
+	background-color: #000040 !important;
+	box-shadow: 0 0 0 10px #000040;
+}
+
+.header #exit{
+	height: 100%;
+	width: auto;
+	margin: 0 50px 0 auto;
+	padding: 5px 0;
+	display: inline-block;
+	float: right;
+}
+
+.header #exit:hover{
+	background-color: #500000;
+	box-shadow: 0 0 0 10px #500000;
+}
+
+.info{
+	height: 800px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	margin: 200px 0 0 0;
+	padding: 50px;
+}
+
+.map{
+	width: 100%;
+	height: 100%;
+	background-color: black;
+}
