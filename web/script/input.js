@@ -2,7 +2,6 @@ const socket = io('http://localhost:3306');
 
 function SignUp() {
 	var name = CheckData("name", 6);
-	var login = CheckData("login", 6);
 	var email = CheckData("email", 10);
 	var group = CheckData("group", 4);
 	var password;
@@ -17,8 +16,8 @@ function SignUp() {
 		document.getElementById("repeat").value = "";
 	}
 
-	if(name && login && email && group && password){
-		socket.emit('signUp', { name:name, login:login, email:email, group:group, password:password });
+	if(name && email && group && password){
+		socket.emit('signUp', { name:name, email:email, group:group, password:password });
 		if(!socket.error)
 			window.location.href = "map.html";
 		else
@@ -27,14 +26,14 @@ function SignUp() {
 }
 
 function SignIn() {
-	var login = CheckData("login");
+	var email = CheckData("email");
 	var password = CheckData("password");
 
 	if(!password)
 		document.getElementById("password").value = "";
 	
-	if(login && password){
-		socket.emit('signIn', {login:login, password:password});
+	if(email && password){
+		socket.emit('signIn', {email:email, password:password});
 		if(!socket.error)
 			window.location.href = "map.html";
 		else
