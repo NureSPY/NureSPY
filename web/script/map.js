@@ -1,3 +1,12 @@
+var user = window.localStorage['currentUser'];
+
+function getUserName() {
+}
+
+document.addEventListener('DOMContentLoaded', () => { 
+	userName.textContent = user.fullname;
+}) 
+
 function map() {
 	var mapOptions = {
 		center: new google.maps.LatLng(50.01502774, 36.22808368),

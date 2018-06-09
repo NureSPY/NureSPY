@@ -1,8 +1,9 @@
 const socket = io('http://localhost:3306');
+const email;
 
 function SignUp() {
 	var name = CheckData("name", 6);
-	var email = CheckData("email", 10);
+	email = CheckData("email", 10);
 	var group = CheckData("group", 4);
 	var phone = CheckData("phone", 10);
 	var password;
@@ -27,7 +28,7 @@ function SignUp() {
 }
 
 function SignIn() {
-	var email = CheckData("email");
+	email = CheckData("email");
 	var password = CheckData("password");
 
 	if(!password)
@@ -45,7 +46,7 @@ function SignOut() {
 function Restore() {
 	if(CheckData("email", 10)){
 		alert("Message with password sent!");
-		socket.emit('restorePassword', {email:email});
+		socket.emit('restorePassword', {mail:email});
 		window.location.href = "signIn.html";
 	}
 }
@@ -86,16 +87,33 @@ function ComparePassword() {
 
 	socket.on('signIn',function (data){
 		if(data.mail != -1){
-			window.location.href = "map.html";
+			socket.emit('userGetInfo', {mail:email});
 		}
 		else
 			alert("Error");
 	});
 
-	socket.on('signUp',function (data){
+	socket.on('userGetInfo', function (data)){
 		if(data.err == 0){
+			var user = new User(data.mail, data.fullname, data.group, data.phone, group.status);
+			window.window.localStorage['currentUser'] = user;
 			window.location.href = "map.html";
 		}
 		else
 			alert("Error");
+	}
+
+	socket.on('signUp',function (data){
+		if(data.err == 0){
+			socket.emit('userGetInfo', {mail:email});
+		}
+		else
+			alert("Error");
+	});
+
+	window.addEventListener('storage', function(event) {
+	    if (event.key !== key) {
+	        return;
+	    }
+	    getMessageFromLocalStorage();
 	});
