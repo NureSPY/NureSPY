@@ -3,6 +3,7 @@ package ua.nure.nurespy;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -20,8 +21,15 @@ import android.widget.Button;
 
 
 import android.provider.Settings;
+import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
+
+import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,8 +43,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         super.onCreate(savedInstanceState);
 
-        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
-        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},123);
+      //  ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
 
         setContentView(R.layout.activity_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -78,33 +85,113 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
 
-//        setContentView(R.layout.app_bar_nav);
+        setContentView(R.layout.app_bar_nav);
         buttonGetLoc = findViewById(R.id.buttonGetLoc);
         buttonDisconnect = findViewById(R.id.buttonDisconnect);
-//        try {
-//            socket = IO.socket("http://192.168.1.102:3000");
-//        } catch (URISyntaxException ex) {
-//            ex.printStackTrace();
-//        }
-//        //double lt, ln;
-//        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+        try
+        {
+            socket = IO.socket("http://178.165.46.109:3002");
+        }
+        catch (URISyntaxException ex){
+            ex.printStackTrace();
+        }
+        double lt, ln;
+        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
         buttonGetLoc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                GPSTracker gpsTracker = new GPSTracker(getApplicationContext());
-//                Location location = gpsTracker.getLocation();
-//                double lat, lng;
-//                if (location != null) {
-//                    lat = location.getLatitude();
-//                    lng = location.getLongitude();
-//
-//                    Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(NavActivity.this, "location = null", Toast.LENGTH_SHORT).show();
-//                }
-            }
+            public void onClick(View view) {
+                socket.connect();
+                GPSTracker g = new GPSTracker(getApplicationContext());
+                Location l = g.getLocation();
+                double lat, lng;
+                if(l!= null){
+                    lat = l.getLatitude();
+                    lng = l.getLongitude();
 
+                    Toast.makeText(getApplicationContext(), "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
+                }
+            }
         });
+        buttonDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                socket.disconnect();
+                // socket.close();
+            }
+        });
+
+
+        //socket.open();
+        // boolean connect = false;
+        JSONObject obj = new JSONObject();
+
+        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
+
+            @Override
+            public void call(Object... args) {
+                Toast.makeText(getApplicationContext(), "Error connect", Toast.LENGTH_SHORT).show();
+            }
+        }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+            }
+        }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+            }
+        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "You`ve disconnected!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+        socket.connect();
+        if(socket.connected()) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
+
+
+
+        //   boolean isConnected =  socket.connected();
+           /* if(connect){
+                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(getApplicationContext(), "Try again! Masha off server!", Toast.LENGTH_SHORT).show();
+
+            }*/
 
     }
 
@@ -156,9 +243,10 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.nav_maps) {
             Intent intent = new Intent(NavActivity.this, MapsActivity.class);
             startActivity(intent);
-        }/* else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(NavActivity.this, Settings.class);
+            startActivity(intent);
+        } /*else if (id == R.id.nav_send) {
 
         }*/
 

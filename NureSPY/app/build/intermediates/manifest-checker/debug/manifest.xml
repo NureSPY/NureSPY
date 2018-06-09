@@ -21,6 +21,7 @@
         android:required="true" />
 
     <application
+        android:name="ua.nure.nurespy.GlobalSocket"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -69,7 +70,8 @@
 
         <activity
             android:name="ua.nure.nurespy.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps" >
+        </activity>
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

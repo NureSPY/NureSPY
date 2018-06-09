@@ -104,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             boolean checked = false;
             TextInputLayout group = findViewById(R.id.group);
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (checked == false) {
+                if (!checked) {
                     checked = true;
                 } else {
                     checked = false;

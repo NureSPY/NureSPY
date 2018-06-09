@@ -1,5 +1,6 @@
 package ua.nure.nurespy;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -20,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,9 +33,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
 import io.socket.client.Socket;
 
 
@@ -43,7 +48,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class SignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     Button mEmailSignInButton;
-    Socket socket;
+    //Socket socket;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -66,11 +71,22 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+
+        ActivityCompat.requestPermissions(SignInActivity.this, new String[]{Manifest.permission.INTERNET}, 123);
+
+
+
+      //  GlobalSocket GloSocket = ((GlobalSocket) getApplicationContext());
+      //  socket = GloSocket.createSocket();
+
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
         populateAutoComplete();
@@ -98,8 +114,16 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                // attemptLogin();
-
+                //  attemptLogin();
+                boolean con = false;
+                try {
+                    socket = IO.socket("http://localhost:3002/");
+                    socket.connect();
+                    if (socket.connected()){
+                        con=true;
+                }} catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(SignInActivity.this, NavActivity.class);
                 startActivity(intent);
 //                try {
@@ -177,6 +201,12 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private void populateAutoComplete() {

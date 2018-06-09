@@ -1,10 +1,13 @@
 package ua.nure.nurespy;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,7 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap map;
     Marker marker;
-
+    AlertDialog.Builder ad;
     GPSTracker gps;
 
     @Override
@@ -32,12 +35,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
-        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},123);
+        ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 123);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //не работает
+        Button searchButton = findViewById(R.id.buttonSearch);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = "Searching";
+                String message = "Write surname:";
+                String button1String = "Search";
+
+                ad = new AlertDialog.Builder(MapsActivity.this);
+                ad.setTitle(title);  // заголовок
+                ad.setMessage(message); // сообщение
+                ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg1) {
+//                Toast.makeText(NavActivity.this, "Вы сделали правильный выбор",
+//                        Toast.LENGTH_LONG).show();
+                        dialog.cancel();
+                    }
+                });
+
+                ad.setCancelable(true);
+            }
+        });
+
+        //не работает
+        Button filterButton = findViewById(R.id.buttonFilter);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = "Filtering";
+                String message = "Choose:";
+                String button1String = "Filter";
+
+                ad = new AlertDialog.Builder(MapsActivity.this);
+                ad.setTitle(title);  // заголовок
+                ad.setMessage(message); // сообщение
+                ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg1) {
+//                Toast.makeText(NavActivity.this, "Вы сделали правильный выбор",
+//                        Toast.LENGTH_LONG).show();
+                        dialog.cancel();
+                    }
+                });
+
+                ad.setCancelable(true);
+            }
+        });
+
 
     }
 
@@ -96,13 +148,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .position(point)
                     .title("Melissa")
                     .snippet("mariia.kryvoruchko@nure.ua"));
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(point,17f));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 17f));
             //Toast.makeText(NavActivity.this, "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(MapsActivity.this, "location = null", Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
 //    private void init() {
