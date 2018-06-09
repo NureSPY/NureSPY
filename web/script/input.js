@@ -1,5 +1,5 @@
 const socket = io('http://localhost:3306');
-const email;
+var email;
 
 function SignUp() {
 	var name = CheckData("name", 6);
@@ -95,8 +95,8 @@ function ComparePassword() {
 
 	socket.on('userGetInfo', function (data){
 		if(data.err == 0){
-			var user = new User(data.mail, data.fullname, data.group, data.phone, group.status);
-			window.window.localStorage['currentUser'] = user;
+			var user = new User(email, data.fullname, data.group, data.phone, group.status);
+			window.localStorage['currentUser'] = user;
 			window.location.href = "map.html";
 		}
 		else
