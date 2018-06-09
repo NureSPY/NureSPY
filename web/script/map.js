@@ -1,11 +1,8 @@
 var user = window.localStorage['currentUser'];
 
-function getUserName() {
-}
-
 document.addEventListener('DOMContentLoaded', () => { 
 	userName.textContent = user.fullname;
-}) 
+});
 
 function map() {
 	var mapOptions = {

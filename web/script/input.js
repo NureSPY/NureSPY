@@ -93,7 +93,7 @@ function ComparePassword() {
 			alert("Error");
 	});
 
-	socket.on('userGetInfo', function (data)){
+	socket.on('userGetInfo', function (data){
 		if(data.err == 0){
 			var user = new User(data.mail, data.fullname, data.group, data.phone, group.status);
 			window.window.localStorage['currentUser'] = user;
@@ -101,7 +101,7 @@ function ComparePassword() {
 		}
 		else
 			alert("Error");
-	}
+	});
 
 	socket.on('signUp',function (data){
 		if(data.err == 0){
