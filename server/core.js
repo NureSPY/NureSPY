@@ -352,4 +352,15 @@ io.on('connection', (socket) =>
             });
         });
     });
+
+    socket.on('disconnect', (data)=>
+    {
+        console.log(users[socket.id].mail + ' on disconnect');
+        for(var spy in users[socket.id].spyed_by)
+        {
+            io.sockets.socket(spy).emit('userSpyedTargetDisconnected',{mail:users[socket.id].mail});
+            users[socket.id].StopSpy(spy);
+        }
+        users[socket.id].Fill(socket.id,'Guest');
+    });
 });
