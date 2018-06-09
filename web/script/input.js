@@ -4,6 +4,7 @@ function SignUp() {
 	var name = CheckData("name", 6);
 	var email = CheckData("email", 10);
 	var group = CheckData("group", 4);
+	var phone = CheckData("phone", 10);
 	var password;
 
 	if(CheckData("password", 6) & CheckData("repeat", 6))
@@ -15,14 +16,14 @@ function SignUp() {
 		document.getElementById("password").value = "";
 		document.getElementById("repeat").value = "";
 	}
+	else
+		password = document.getElementById("password").value;
 
-	if(name && email && group && password){
-		socket.emit('signUp', { name:name, email:email, group:group, password:password });
-		if(!socket.error)
-			window.location.href = "map.html";
-		else
-			alert("Error!");	
+	if(name && email && group && phone && password){
+		socket.emit('signUp', { fullname:name, mail:email, phone:phone, group:group, password:password });
 	}
+	else
+		alert("error");
 }
 
 function SignIn() {
@@ -33,12 +34,12 @@ function SignIn() {
 		document.getElementById("password").value = "";
 	
 	if(email && password){
-		socket.emit('signIn', {email:email, password:password});
-		if(!socket.error)
-			window.location.href = "map.html";
-		else
-			alert("User is not found!");
+		socket.emit('signIn', { mail:email, password:password });
 	}
+}
+
+function SignOut() {
+	socket.emit('signOut',  { });
 }
 
 function Restore() {
@@ -82,3 +83,19 @@ function ComparePassword() {
 		return true;
 	}
 }
+
+	socket.on('signIn',function (data){
+		if(data.mail != -1){
+			window.location.href = "map.html";
+		}
+		else
+			alert("Error");
+	});
+
+	socket.on('signUp',function (data){
+		if(data.err == 0){
+			window.location.href = "map.html";
+		}
+		else
+			alert("Error");
+	});
