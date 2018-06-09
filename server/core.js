@@ -66,12 +66,16 @@ io.on('connection', (socket) =>
             {
                 if(table[0].password == data.password)
                 {
-                    socket.emit('signIn',{err:0});
-                    users[socket.id].Fill(socket.id,data.login);        
+                    dbcon.query("SELECT * FROM user WHERE mail = '" + data.mail + "';",
+                    (err,table)=>
+                    {
+                        socket.emit('signIn',{mail:table[0].mail,fullname:table[0].fullname,phone:table[0].phone,status:table[0].status,group:table[0].group,stay_in:table[0].stay_in});
+                        users[socket.id].Fill(socket.id,data.mail); 
+                    });       
                 }    
                 else
                 {
-                    socket.emit('signIn',{err:1});         
+                    socket.emit('signIn',{mail:-1});         
                 }        
             }
             else
