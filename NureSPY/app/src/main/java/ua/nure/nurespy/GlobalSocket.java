@@ -19,7 +19,7 @@ public class GlobalSocket extends Application {
     public Socket createSocket() {
 
         try {
-            mSocket = IO.socket( new URI("http://localhost:3001/"));
+            mSocket = IO.socket( new URI("http://localhost:3002/"));
         } catch (URISyntaxException URIse) {
             URIse.printStackTrace();
         }

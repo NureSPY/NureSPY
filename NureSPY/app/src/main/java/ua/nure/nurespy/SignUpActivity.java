@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -32,15 +33,19 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
-
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,8 +54,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-
-    //MyTask mt;
+    Socket socket;
+    MyTask mt;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -69,24 +74,30 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView email;
+    private EditText password;
+    private EditText fullName;
+    private EditText groupText;
+    private EditText phone;
     private View mProgressView;
     private View mLoginFormView;
 
-    //    final EditText email = (EditText)findViewById(R.id.email);
-//    final EditText password = (EditText)findViewById(R.id.password);
-    //  final EditText password2 = (EditText)findViewById(R.id.password2);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        email = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        password = (EditText) findViewById(R.id.password);
+        fullName = (EditText) findViewById(R.id.fullName);
+        phone = (EditText) findViewById(R.id.phone);
+
+
+
+        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -97,34 +108,71 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
+        try {
+            socket = IO.socket("http://178.165.46.109:3002");
+        } catch (URISyntaxException ex) {
+            ex.printStackTrace();
+        }
 
-
-        Switch studSwitch = findViewById(R.id.switch3);
+        final Switch studSwitch = findViewById(R.id.switch3);
         studSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            boolean checked = false;
+            boolean checked = true;
             TextInputLayout group = findViewById(R.id.group);
+
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!checked) {
                     checked = true;
                 } else {
                     checked = false;
                 }
-                if (checked == true) {
+                if (checked) {
                     group.setVisibility(View.VISIBLE);
-                }
-                if (checked == false) {
+                } else if (!checked) {
                     group.setVisibility(View.INVISIBLE);
                 }
             }
         });
 
-
         Button signUpButton = (Button) findViewById(R.id.sign_up_btn);
         signUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  mt = new MyTask();
-                // mt.execute();
+
+                socket.connect();
+
+                String status;
+                if (studSwitch.isChecked()) {
+                    status = "student";
+                    groupText = findViewById(R.id.groupText);
+                    JSONObject obj = new JSONObject();
+                    try {
+                        obj.put("mail", email.getText().toString());
+                        obj.put("password", password.getText().toString());
+                        obj.put("fullName", fullName.getText().toString());
+                        obj.put("phone", phone.getText().toString());
+                        obj.put("group", groupText.getText().toString());
+                        obj.put("status", status);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    socket.emit("signUp", obj);
+                } else {
+                    status = "teacher";
+                    JSONObject obj = new JSONObject();
+                    try {
+                        obj.put("mail", email.getText().toString());
+                        obj.put("password", password.getText().toString());
+                        obj.put("fullName", fullName.getText().toString());
+                        obj.put("phone", phone.getText().toString());
+                        obj.put("group", "null");
+                        obj.put("status", status);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    socket.emit("signUp", obj);
+                }
 
                 //attemptLogin();
                 Intent intent = new Intent(SignUpActivity.this, NavActivity.class);
@@ -152,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(email, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -191,31 +239,31 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        email.setError(null);
+        password.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = this.email.getText().toString();
+        String password = this.password.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            this.password.setError(getString(R.string.error_invalid_password));
+            focusView = this.password;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            this.email.setError(getString(R.string.error_field_required));
+            focusView = this.email;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            this.email.setError(getString(R.string.error_invalid_email));
+            focusView = this.email;
             cancel = true;
         }
 
@@ -318,7 +366,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
                 new ArrayAdapter<>(SignUpActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        email.setAdapter(adapter);
     }
 
 
@@ -333,20 +381,21 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
 
-//    public class MyTask extends AsyncTask<Void, Integer, String> {
-//        // 3 параметр это тип возвращаемых данных методом doInBackground, его я буду обрабатывать в onPostExecute
-//        // фоновая работа
-//        @Override
-////        protected String doInBackground(Void... params) {
-////            try {
-////               // return SendServer.sendRegData(""+email.getText().toString()+"",""+ password.getText().toString()+"");
-////            } catch (IOException e) {
-////                e.printStackTrace();
-////                return e.toString();
-////            }
-////        }
-//        // выполняется после doInBackground, имеет доступ к UI
-//        protected void onPostExecute(String result) {
+    public class MyTask extends AsyncTask<Void, Integer, String> {
+        // 3 параметр это тип возвращаемых данных методом doInBackground, его я буду обрабатывать в onPostExecute
+        // фоновая работа
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                return SendServer.sendRegData("" + email.getText().toString() + "", "" + password.getText().toString() + "");
+            } catch (IOException e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        // выполняется после doInBackground, имеет доступ к UI
+        protected void onPostExecute(String result) {
 //            JSONObject object = null;
 //            try {
 //                object = new JSONObject(result);
@@ -358,11 +407,10 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 //            } catch (JSONException e1) {
 //                e1.printStackTrace();
 //            }
-//        }
-//
-//
-//
-//    }
+        }
+
+
+    }
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
@@ -409,8 +457,8 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                password.setError(getString(R.string.error_incorrect_password));
+                password.requestFocus();
             }
         }
 
@@ -419,13 +467,6 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             mAuthTask = null;
             showProgress(false);
         }
-
-//socket.emit('signUp', {fullname: 'Eugene', login: 'anime', password: '123456', mail: 'eugene@nure.ua'});
-//
-//
-//  socket.on('signUp', res =>{
-//            document.writeln(`Sign Up code = ${res.err}`)
-//        })
 
 
     }

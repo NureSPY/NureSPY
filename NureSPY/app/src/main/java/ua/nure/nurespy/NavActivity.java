@@ -85,7 +85,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        setContentView(R.layout.app_bar_nav);
+        //setContentView(R.layout.app_bar_nav);
         buttonGetLoc = findViewById(R.id.buttonGetLoc);
         buttonDisconnect = findViewById(R.id.buttonDisconnect);
         try

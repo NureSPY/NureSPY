@@ -22,7 +22,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +31,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class SignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-    Button mEmailSignInButton;
+    Button signInButton;
     //Socket socket;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -80,14 +82,6 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         setContentView(R.layout.activity_sign_in);
 
 
-        ActivityCompat.requestPermissions(SignInActivity.this, new String[]{Manifest.permission.INTERNET}, 123);
-
-
-
-      //  GlobalSocket GloSocket = ((GlobalSocket) getApplicationContext());
-      //  socket = GloSocket.createSocket();
-
-        // Set up the login form.
         mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
@@ -101,42 +95,36 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
                 }
                 return false;
 
-
-//                socket.emit('signIn', {login: 'maria', password: '123456'});
-//
-//                socket.on('signIn', res =>{
-//                        document.writeln(res.err);
-//  });
             }
         });
 
-        mEmailSignInButton = findViewById(R.id.buttonSign);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+
+
+        signInButton = findViewById(R.id.buttonSign);
+        signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 //  attemptLogin();
-                boolean con = false;
                 try {
-                    socket = IO.socket("http://localhost:3002/");
-                    socket.connect();
-                    if (socket.connected()){
-                        con=true;
-                }} catch (URISyntaxException e) {
+                    socket = IO.socket("http://178.165.46.109:3002");
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
+                socket.connect();
+
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("mail",mEmailView.getText().toString());
+                    obj.put("password",mPasswordView.getText().toString());
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                socket.emit("signIn", obj);
+
                 Intent intent = new Intent(SignInActivity.this, NavActivity.class);
                 startActivity(intent);
-//                try {
-//                    socket = IO.socket("http://178.165.46.109:3000");
-//                } catch (URISyntaxException ex) {
-//                    ex.printStackTrace();
-//                }
 
-
-                //socket.open();
-                // boolean connect = false;
-//                JSONObject obj = new JSONObject();
-//
 //                socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 //                    @Override
 //                    public void call(Object... args) {
@@ -179,13 +167,6 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
 //                }
 
 
-                //   boolean isConnected =  socket.connected();
-           /* if(connect){
-                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(getApplicationContext(), "Try again! Masha off server!", Toast.LENGTH_SHORT).show();
-
-            }*/
             }
         });
 
