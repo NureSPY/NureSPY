@@ -2,7 +2,7 @@
 
 module.exports = class User{
   constructor(mail){
-  this.spayed_by = [];
+  this.spayed_by = new Map();
   this.mail = mail;
   this.id = -1;
   this.coords = {
@@ -12,10 +12,10 @@ module.exports = class User{
     }
   }
   Spy(id){
-    this.spayed_by[id] = true;
+    this.spayed_by.set(id, true)
   }
   StopSpy(index){
-    this.spyed_by.splice(index, 1);
+    this.spyed_by.delete(index)
   }
   getId(){
     return this.id;

@@ -165,7 +165,7 @@ io.on('connection', socket => {
           });            
         });
 
-        socket.on('chatGetMessages', (data)=>
+    socket.on('chatGetMessages', (data)=>
         {
             db.query("SELECT user.mail,text,datetime FROM message,user WHERE message.user_id = user.id AND message.chat_id = " +  data.id+ ";",
             table =>
@@ -188,34 +188,80 @@ io.on('connection', socket => {
     socket.emit('locationsUpdate', Array.from(locationMap))
   })
 
+  socket.on('userEditProfile', data =>{
+    db.query("UPDATE user SET fullname = '"+data.fullname+"', phone = '"+data.phone+"', status = '"+data.status+"' group = '"+data.group+"';", res =>{
+      console.log(res)
+    })
+  })
+  socket.on('userDelete', data =>{
+    db.query("DELETE FROM user WHERE mail = "+data.mail+"';")
+  })
+  socket.on('userSpy', data =>{
+    let b = false;
+      map.forEach((value, key, mop)=>{
+      if(value.getMail() == data.mail) 
+      {
+        mop.get(key).Spy(socket.id)
+        b = true;
+      }
+      if(b){
+        socket.emit('userSpy', {err: 0})
+      }else socket.emit('userSpy', {err: 1})
+
+   })
+  })
+  socket.on('userSpyStop', data =>{
+      map.forEach((value, key, mop)=>{
+      if(value.getMail() == data.mail) 
+      {
+        mop.get(key).SpyStop(socket.id)
+      }
+
+   })
+  })
+  socket.on('eventCreate', data =>{
+    db.query("INSERT INTO event SET name = '"+data.name+
+    "', user_id = '"+user.getId()+
+    "', datetime = '"+date.datetime+
+    "', location = '"+date.location+
+    "', duration = '"+date.location+
+    "',  description = '"+date.description+
+    "';", res =>{
+      socket.emit('eventCreate', res)
+    })
+  })
+  socket.on('eventGetAll', data =>{
+    db.query("SELECT id, name, datetime FROM event;", res =>{
+      socket.emit('eventGetAll', res)
+    })
+  })
+  socket.on('eventGetInfo', data =>{
+    db.query("SELECT description, location, duration FROM event WHERE id = '"+data.id+"';", res =>{
+      socket.emit('eventGetInfo', res)
+    })
+  })
+  socket.on('eventValidate', data =>{
+    db.query("UPDATE event SET confirmed = '1' WHERE id = '"+data.id+"';", res =>{
+      console.log(res)
+    })
+  })
+  socket.on('eventDisquit', data =>{
+    db.query("DELETE FROM event WHERE id = '"+data.id+"';")
+  })
   socket.on('disconnect', () => {
     console.log('A user disconnected.');
     user.spayed_by.forEach((value, index, array)=>{
-      socket.to(index).emit(('userSpyedTargetDisconnected',{mail:user.mail}))
-      array.splice()
-    })
-      for(var spy in users[socket.id].spyed_by)      
-      {          
-              io.sockets.socket(spy).emit('userSpyedTargetDisconnected',{mail:users[socket.id].mail});
-              users[socket.id].StopSpy(spy);
-      }
+      socket.to(index).emit(('userSpyedTargetDisconnected',{mail:user.getMail()}))
+    }) 
     onlineUsers.delete(socket.id)
     locationMap.delete(socket.id)
   })
+  
 })
 server.listen(3001,"0.0.0.0", err => {
-
- /*  db.query("SELECT password FROM user WHERE mail = 'nope'", res =>{
-    console.log(res);
-  }) */ // test queries
 
   if (err) {
     throw err
   }
-/*   setInterval(()=>{
-    db.query('SELECT 1', res =>{
-      console.log(res);
-    })
-  }, 5000) */
   console.log("Server works")
 })
