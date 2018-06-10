@@ -408,15 +408,32 @@ io.on('connection', (socket) =>
         }
     });
 
-    socket.on('userFilter',(data)=>
+    socket.on('userFilter', (data)=>
     {
-        console.log(users[socket.id].mail + 'on userFilter');
+        console.log(users[socket.id].mail + ' on userFilter');
         dbcon.query("SELECT mail FROM user WHERE status = '" + data.status + "' AND `group` = '" + data.group + "';",
         (err,table)=>
         {
             if(!err)
             {
                 socket.emit('userFilter',{users:table});
+            }
+            else
+            {
+                console.log(err);
+            }
+        });
+    });
+
+    socket.io('userGetGroups', (data)=>
+    {
+        console.log(users[socket.id].mail + ' on userGetGroups');
+        dbcon.query("SELECT DISTINCT `group` FROM user WHERE status = '" + data.status + "';", 
+        (err,table)=>
+        {
+            if(!err)
+            {
+                socket.emit('userGetGroups',{groups:table});
             }
             else
             {
