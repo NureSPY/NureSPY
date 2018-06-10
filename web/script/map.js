@@ -1,7 +1,19 @@
-var user = window.localStorage['currentUser'];
+const socket = io('http://localhost:3306');
+var user;
 
 document.addEventListener('DOMContentLoaded', () => { 
-	userName.textContent = user.fullname;
+	var email = window.location.href.split("?")[1].split("=")[1];
+	socket.emit('userGetInfo', {mail:email});
+});
+
+
+socket.on('userGetInfo', function (data){
+	if(data.err == 0){
+		user = new User(email, data.fullname, data.group, data.phone, data.status);
+		window.localeStorage['currentUser'] = user;
+	}
+	else
+		alert("Error");
 });
 
 function map() {

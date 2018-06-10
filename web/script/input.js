@@ -87,17 +87,7 @@ function ComparePassword() {
 
 	socket.on('signIn',function (data){
 		if(data.mail != -1){
-			socket.emit('userGetInfo', {mail:email});
-		}
-		else
-			alert("Error");
-	});
-
-	socket.on('userGetInfo', function (data){
-		if(data.err == 0){
-			var user = new User(email, data.fullname, data.group, data.phone, group.status);
-			window.localStorage['currentUser'] = user;
-			window.location.href = "map.html";
+			document.location.href = "mao.html?mail=" + email;
 		}
 		else
 			alert("Error");
@@ -105,15 +95,8 @@ function ComparePassword() {
 
 	socket.on('signUp',function (data){
 		if(data.err == 0){
-			socket.emit('userGetInfo', {mail:email});
+			document.location.href = "mao.html?mail=" + email;
 		}
 		else
 			alert("Error");
-	});
-
-	window.addEventListener('storage', function(event) {
-	    if (event.key !== key) {
-	        return;
-	    }
-	    getMessageFromLocalStorage();
 	});
