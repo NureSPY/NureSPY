@@ -5,6 +5,6 @@ class User{
 		this.group = group;
 		this.phone = phone;
 		this.status = status;
-		this.spaydingUsers = [];
+		this.spyingUsers = [];
 	}
 }

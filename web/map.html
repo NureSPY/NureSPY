@@ -16,10 +16,15 @@
 			<a href="events.html"><input type="button" name="events" value="Events"></a>
 			<a href="profile.html"><input type="button" name="profile" value="Profile"></a>
 		</div>
-		<a href="index.html"><img id="exit" src="images/map/exit.png"></a>
+		<a href="index.html" onclick="SignOut()"><img id="exit" src="images/map/exit.png"></a>
 	</div>
 	<div class="info">
-		<p id="userName" style="color: white">User name</p>
+		<div id="buttons">
+			<input type="text" id="finder" name="finder" oninput="FinderTextChanged()">
+			<input type="button" id="clear" value="Clear" onclick="Clear()" style="visibility: hidden;">
+			<input type="button" id="find" value="Find" onclick="Find()" style="visibility: hidden;">
+			<input type="button" id="location" value="Show me" onclick="EditStatus()">
+		</div>
 		<div id="map"></div>
 	</div>
 </body>
@@ -27,7 +32,7 @@
     <p>&#169 NureSPY, Inc.</p>
     <script type="text/javascript" src="script/user.js"></script>
     <script type="text/javascript" src="script/socket.io.js"></script> 
-    <script src="script/map.js"></script>
+    <script type="text/javascript" src="script/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=map"></script>
 </footer>
 </html>

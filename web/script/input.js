@@ -39,10 +39,6 @@ function SignIn() {
 	}
 }
 
-function SignOut() {
-	socket.emit('signOut',  { });
-}
-
 function Restore() {
 	if(CheckData("email", 10)){
 		alert("Message with password sent!");
