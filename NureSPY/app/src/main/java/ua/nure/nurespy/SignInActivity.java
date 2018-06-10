@@ -1,6 +1,5 @@
 package ua.nure.nurespy;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -22,25 +20,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -67,10 +63,8 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView email;
+    private EditText password;
     private View mProgressView;
     private View mLoginFormView;
     Socket socket;
@@ -81,91 +75,105 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-
-        mEmailView = findViewById(R.id.email);
+        email = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-
-            }
-        });
-
-
+        password = findViewById(R.id.password);
 
         signInButton = findViewById(R.id.buttonSign);
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  attemptLogin();
-                try {
-                    socket = IO.socket("http://178.165.46.109:3002");
-                } catch (URISyntaxException ex) {
-                    ex.printStackTrace();
-                }
+                attemptLogin();
+
+                Global app = (Global) getApplication();
+                socket = app.getSocket();
                 socket.connect();
 
                 JSONObject obj = new JSONObject();
                 try {
-                    obj.put("mail",mEmailView.getText().toString());
-                    obj.put("password",mPasswordView.getText().toString());
+                    obj.put("mail", email.getText().toString());
+                    obj.put("password", password.getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 socket.emit("signIn", obj);
 
-                Intent intent = new Intent(SignInActivity.this, NavActivity.class);
-                startActivity(intent);
+                socket.on("signIn", new Emitter.Listener() {
+                    @Override
+                    public void call(Object... args) {
+                        JSONObject obj = (JSONObject) args[0];
+                        int code = 0;
+                        try {
+                            code = obj.getInt("err");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (code == 0) {
+                            String fullNameStr = "";
+                            try {
+                                fullNameStr = obj.getString("fullname");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String mailStr = "";
+                            try {
+                                mailStr = obj.getString("mail");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String phoneStr = "";
+                            try {
+                                phoneStr = obj.getString("phone");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String passwordStr = "";
+                            try {
+                                passwordStr = obj.getString("password");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String groupStr = "";
+                            try {
+                                groupStr = obj.getString("group");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            String statusStr = "";
+                            try {
+                                statusStr = obj.getString("status");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-//                socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-//                    @Override
-//                    public void call(Object... args) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//
-//                    }
-//                }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
-//
-//                    @Override
-//                    public void call(Object... args) {
-//                        Toast.makeText(getApplicationContext(), "Error sign in", Toast.LENGTH_SHORT).show();
-//                    }
-//                }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
-//                    @Override
-//                    public void call(Object... args) {
-//                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                socket.connect();
-//                if (socket.connected()) {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                } else {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
+                            Intent intent = new Intent(SignInActivity.this, NavActivity.class);
+                            intent.putExtra("fullname", fullNameStr);
+                            intent.putExtra("mail", mailStr);
+                            intent.putExtra("password", passwordStr);
+                            intent.putExtra("group", groupStr);
+                            intent.putExtra("status", statusStr);
+                            intent.putExtra("phone", phoneStr);
+                            startActivity(intent);
 
+                        } else if (code == 1) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Wrong mail", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else if (code == 2) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
 
             }
         });
@@ -206,7 +214,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(email, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -245,31 +253,31 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        email.setError(null);
+        password.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = this.email.getText().toString();
+        String password = this.password.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            this.password.setError(getString(R.string.error_invalid_password));
+            focusView = this.password;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            this.email.setError(getString(R.string.error_field_required));
+            focusView = this.email;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            this.email.setError(getString(R.string.error_invalid_email));
+            focusView = this.email;
             cancel = true;
         }
 
@@ -367,12 +375,11 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(SignInActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        email.setAdapter(adapter);
     }
 
 
@@ -431,8 +438,8 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                password.setError(getString(R.string.error_incorrect_password));
+                password.requestFocus();
             }
         }
 

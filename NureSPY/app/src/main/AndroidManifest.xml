@@ -11,14 +11,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".Global"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name = ".GlobalSocket"
-        >
+        android:theme="@style/AppTheme">
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,16 +27,11 @@
         </activity>
         <activity
             android:name=".EventActivity"
-            android:label="@string/title_activity_meet"
+            android:label="Event"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Settings"
-            android:label="@string/title_activity_settings" />
-        <!--
-            <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_sing_in"></activity>
-        -->
+            android:name=".SettingsActivity"
+            android:label="Settings" />
         <activity
             android:name=".NavActivity"
             android:label="@string/title_activity_nav"
@@ -59,8 +53,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

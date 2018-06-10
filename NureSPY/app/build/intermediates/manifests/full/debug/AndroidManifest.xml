@@ -21,7 +21,7 @@
         android:required="true" />
 
     <application
-        android:name="ua.nure.nurespy.GlobalSocket"
+        android:name="ua.nure.nurespy.Global"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,16 +39,11 @@
         </activity>
         <activity
             android:name="ua.nure.nurespy.EventActivity"
-            android:label="@string/title_activity_meet"
+            android:label="Event"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="ua.nure.nurespy.Settings"
-            android:label="@string/title_activity_settings" />
-        <!--
-            <activity
-            android:name=".SignInActivity"
-            android:label="@string/title_activity_sing_in"></activity>
-        -->
+            android:name="ua.nure.nurespy.SettingsActivity"
+            android:label="Settings" />
         <activity
             android:name="ua.nure.nurespy.NavActivity"
             android:label="@string/title_activity_nav"
@@ -70,8 +65,7 @@
 
         <activity
             android:name="ua.nure.nurespy.MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

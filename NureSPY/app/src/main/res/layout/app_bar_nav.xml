@@ -33,20 +33,4 @@
         app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@android:drawable/ic_menu_search" />
 
-    <Button
-        android:id="@+id/buttonGetLoc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GetLoc"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|center" />
-
-    <Button
-        android:id="@+id/buttonDisconnect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disconnect"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|bottom" />
-
 </android.support.design.widget.CoordinatorLayout>

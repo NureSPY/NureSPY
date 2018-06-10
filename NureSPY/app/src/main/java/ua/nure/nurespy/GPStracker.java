@@ -11,32 +11,47 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-public class GPSTracker implements LocationListener{
+import java.util.List;
+
+public class GPSTracker implements LocationListener {
     Context context;
-    public GPSTracker(Context c){
+
+    GPSTracker(Context c) {
         context = c;
     }
-    public Location getLocation(){
-      //  ActivityCompat.requestPermissions(MapsActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
 
-        if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(context, "Permission is not granted", Toast.LENGTH_SHORT).show();
+    public Location getLastKnownLocation() {
+        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = lm.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return null;
+            }
+            Location l = lm.getLastKnownLocation(provider);
+
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                bestLocation = l;
+            }
+        }
+        if (bestLocation == null) {
             return null;
         }
-        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        boolean isGPSEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(isGPSEnabled){
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,6000, 10, this);
-            Location l = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            return l;
-        }else{
-            Toast.makeText(context, "Pls enable GPS", Toast.LENGTH_LONG).show();
-        }
-        return null;
+        return bestLocation;
     }
+
     @Override
     public void onLocationChanged(Location location) {
-
+        //runOnUiThread(new Runnable() {
+         //   @Override
+          //  public void run() {
+                Toast.makeText(context, "loc changed", Toast.LENGTH_SHORT).show();
+          //  }
+       // });
     }
 
     @Override

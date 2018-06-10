@@ -3,7 +3,10 @@ package ua.nure.nurespy;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -21,11 +24,13 @@ import android.widget.Button;
 
 
 import android.provider.Settings;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.Date;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -34,44 +39,32 @@ import io.socket.emitter.Emitter;
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog.Builder ad;
-    Button buttonGetLoc;
-    Button buttonDisconnect;
+
     Socket socket;
+    TextView textViewUserName;
+    TextView textViewUserMail;
+    String fullname = "";
+    String phone = "";
+    String mail = "";
+    String password = "";
+    String group = "";
+    String status = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-      //  ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
 
         setContentView(R.layout.activity_nav);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        String title = "Searching";
-        String message = "Write surname:";
-        String button1String = "Search";
-
-        ad = new AlertDialog.Builder(NavActivity.this);
-        ad.setTitle(title);  // заголовок
-        ad.setMessage(message); // сообщение
-        ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int arg1) {
-//                Toast.makeText(NavActivity.this, "Вы сделали правильный выбор",
-//                        Toast.LENGTH_LONG).show();
-                dialog.cancel();
-            }
-        });
-
-        ad.setCancelable(true);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ad.show();
+
             }
         });
 
@@ -83,115 +76,20 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        textViewUserName = headerView.findViewById(R.id.textViewUserName);
+        textViewUserMail = headerView.findViewById(R.id.textViewUserMail);
+        Intent intent = getIntent();
 
+        fullname = intent.getStringExtra("fullname");
+        mail = intent.getStringExtra("mail");
+        password = intent.getStringExtra("password");
+        group = intent.getStringExtra("group");
+        phone = intent.getStringExtra("phone");
+        status = intent.getStringExtra("status");
 
-        //setContentView(R.layout.app_bar_nav);
-        buttonGetLoc = findViewById(R.id.buttonGetLoc);
-        buttonDisconnect = findViewById(R.id.buttonDisconnect);
-        try
-        {
-            socket = IO.socket("http://178.165.46.109:3002");
-        }
-        catch (URISyntaxException ex){
-            ex.printStackTrace();
-        }
-        double lt, ln;
-        ActivityCompat.requestPermissions(NavActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
-        buttonGetLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                socket.connect();
-                GPSTracker g = new GPSTracker(getApplicationContext());
-                Location l = g.getLocation();
-                double lat, lng;
-                if(l!= null){
-                    lat = l.getLatitude();
-                    lng = l.getLongitude();
-
-                    Toast.makeText(getApplicationContext(), "LONG:" + lng + "\n LAT" + lat, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        buttonDisconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                socket.disconnect();
-                // socket.close();
-            }
-        });
-
-
-        //socket.open();
-        // boolean connect = false;
-        JSONObject obj = new JSONObject();
-
-        socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        }).on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {
-                Toast.makeText(getApplicationContext(), "Error connect", Toast.LENGTH_SHORT).show();
-            }
-        }).on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-            }
-        }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-
-            }
-        }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "You`ve disconnected!", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-            }
-        });
-        socket.connect();
-        if(socket.connected()) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(), "STATE = CONNECTED", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else{
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(), "STATE = DISCONNECTED", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-
-
-
-
-        //   boolean isConnected =  socket.connected();
-           /* if(connect){
-                Toast.makeText(getApplicationContext(), "You`ve connected!", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(getApplicationContext(), "Try again! Masha off server!", Toast.LENGTH_SHORT).show();
-
-            }*/
+        textViewUserName.setText(fullname);
+        textViewUserMail.setText(mail);
 
     }
 
@@ -221,7 +119,8 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(NavActivity.this, Settings.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -238,20 +137,23 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             startActivity(intent);
 
         } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(NavActivity.this, Settings.class);
+            Intent intent = new Intent(NavActivity.this, SettingsActivity.class);
+            intent.putExtra("fullname", fullname);
+            intent.putExtra("mail", mail);
+            intent.putExtra("password", password);
+            intent.putExtra("group", group);
+            intent.putExtra("status", status);
+            intent.putExtra("phone", phone);
             startActivity(intent);
         } else if (id == R.id.nav_maps) {
             Intent intent = new Intent(NavActivity.this, MapsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(NavActivity.this, Settings.class);
-            startActivity(intent);
-        } /*else if (id == R.id.nav_send) {
+        }
 
-        }*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

@@ -1028,6 +1028,10 @@
         "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\afef7a3ebb9e53b0ea072697792c1801\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\res\\merged\\debug\\drawable_nure300.jpg.flat",
+        "source": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\src\\main\\res\\drawable\\nure300.jpg"
+    },
+    {
         "merged": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\afef7a3ebb9e53b0ea072697792c1801\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
@@ -1438,6 +1442,10 @@
     {
         "merged": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "C:\\Users\\Melissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\afef7a3ebb9e53b0ea072697792c1801\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_settings.xml.flat",
+        "source": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\src\\main\\res\\layout\\activity_settings.xml"
     },
     {
         "merged": "C:\\Users\\Melissa\\Documents\\GitHub\\NureSPY\\NureSPY\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_grow_fade_in_from_bottom.xml.flat",
