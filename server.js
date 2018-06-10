@@ -35,13 +35,16 @@ io.on('connection', socket => {
     if(res.length>0)
     {
       if(data.password == res[0].password){
-        socket.emit('signIn',{err:0, 
+        socket.emit('signIn',{
+          err:0, 
           fullname: res[0].fullname,
           mail: res[0].mail, 
           password: res[0].password, 
           group: res[0].group, 
           stay_in: res[0].stay_in,
-        status: res[0].status})
+          status: res[0].status,
+          phone: res[0].phone
+        })
       
         user.setId(res[0].id)
         user.setMail(res[0].mail)
@@ -64,7 +67,7 @@ io.on('connection', socket => {
       if(res.length > 0)     
       {
         socket.emit('signUp',{err:1});//mail already used
-      } else db.query("INSERT INTO user SET fullname = '" + data.fullname + "',password ='" + data.password + "', mail = '" + data.mail + "', phone = '" + data.phone +"', `group` = '8', status = 'student';", res =>{
+      } else db.query("INSERT INTO user SET fullname = '" + data.fullname + "',password ='" + data.password + "', mail = '" + data.mail + "', phone = '"+data.phone +"', `group` = '"+data.group+"', status = '"+data.status+"';", res =>{
          // console.log(res)
           socket.emit('signUp',{err:0});// success register - SUCCESS
         })
@@ -180,22 +183,30 @@ io.on('connection', socket => {
   //  console.log(socket.id, socket.client.id);
      user.setCoords(pos.lat, pos.lng)
     let coords = user.getCoords()
-    console.log(socket.id, coords.lat, coords.lng)
+    //console.log(socket.id, coords.lat, coords.lng)
+    const {lat, lng, h} = user.getCoords()
+    console.log(`${user.getMail()} has moved to ${lat} , ${lng}`)
     locationMap.set(socket.id, pos)
   })
 
   socket.on('requestLocations', () => {
-    socket.emit('locationsUpdate', Array.from(locationMap))
+  let arr = []
+  onlineUsers.forEach((val, key, map)=>{
+    if(val.getMail() != user.getMail()) arr.push({mail: val.getMail(), coords: val.getCoords()})
   })
-
+    socket.emit('locationsUpdate', arr)
+  })
+  
   socket.on('userEditProfile', data =>{
-    db.query("UPDATE user SET fullname = '"+data.fullname+"', phone = '"+data.phone+"', status = '"+data.status+"' group = '"+data.group+"';", res =>{
+    db.query("UPDATE user SET fullname = '"+data.fullname+"', phone = '"+data.phone+"', status = '"+data.status+"' `group` = '"+data.group+"' WHERE id = '"+user.getId()+"';", res =>{
       console.log(res)
     })
   })
+  
   socket.on('userDelete', data =>{
     db.query("DELETE FROM user WHERE mail = "+data.mail+"';")
   })
+  
   socket.on('userSpy', data =>{
     let b = false;
       map.forEach((value, key, mop)=>{
@@ -210,6 +221,7 @@ io.on('connection', socket => {
 
    })
   })
+  
   socket.on('userSpyStop', data =>{
       map.forEach((value, key, mop)=>{
       if(value.getMail() == data.mail) 
@@ -219,6 +231,7 @@ io.on('connection', socket => {
 
    })
   })
+  
   socket.on('eventCreate', data =>{
     db.query("INSERT INTO event SET name = '"+data.name+
     "', user_id = '"+user.getId()+
@@ -248,6 +261,19 @@ io.on('connection', socket => {
   socket.on('eventDisquit', data =>{
     db.query("DELETE FROM event WHERE id = '"+data.id+"';")
   })
+  
+  socket.on('filterByGroup', data =>{
+    db.query("SELECT mail FROM user WHERE `group` = '"+data.group+"';", res =>{
+      console.log(`USER ${user.getMail()} TRY TO FILTER BY ${data.group} GROUP`)
+      socket.emit('filterByGroup', res)
+    })
+  })
+  socket.on('filterByStatus', data =>{
+    db.query("SELECT mail FROM user WHERE status = '"+data.status+"';", res =>{
+      console.log(`USER ${user.getMail()} TRY TO FILTER BY ${data.status} STATUS`)
+    })
+    socket.emit('filterByStatus', res)
+  })
   socket.on('disconnect', () => {
     console.log('A user disconnected.');
     user.spayed_by.forEach((value, index, array)=>{
@@ -259,7 +285,9 @@ io.on('connection', socket => {
   
 })
 server.listen(3001,"0.0.0.0", err => {
-
+  /* db.query("SELECT * FROM user", res =>{
+    console.log(res)
+  }) */
   if (err) {
     throw err
   }
