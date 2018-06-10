@@ -364,7 +364,7 @@ io.on('connection', (socket) =>
         users[socket.id].height = data.height;
         for(var u in users)
         {
-            io.sockets.spcket(u.id).emit('userMove',{spyed:0,mail:users[socket.id].mail,latitude:data.latitude, longitude:data.longitude, height:data.height});
+            io.sockets.socket(u.id).emit('userMove',{spyed:0,mail:users[socket.id].mail,latitude:data.latitude, longitude:data.longitude, height:data.height});
         }
         for(var spy in users[socket.id].spyed_by)
         {
