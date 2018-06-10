@@ -1,8 +1,11 @@
+const socket = io('http://localhost:3306');
+var email;
+
 function SignUp() {
 	var name = CheckData("name", 6);
-	var login = CheckData("login", 6);
-	var email = CheckData("email", 10);
+	email = CheckData("email", 10);
 	var group = CheckData("group", 4);
+	var phone = CheckData("phone", 10);
 	var password;
 
 	if(CheckData("password", 6) & CheckData("repeat", 6))
@@ -14,30 +17,33 @@ function SignUp() {
 		document.getElementById("password").value = "";
 		document.getElementById("repeat").value = "";
 	}
+	else
+		password = document.getElementById("password").value;
 
-	if(name && login && email && group && password){
-		alert("Sign Up!");
-		window.location.href = "map.html"
+	if(name && email && group && phone && password){
+		socket.emit('signUp', { fullname:name, mail:email, phone:phone, group:group, password:password });
 	}
+	else
+		alert("error");
 }
 
 function SignIn() {
-	var login = CheckData("login");
+	email = CheckData("email");
 	var password = CheckData("password");
 
 	if(!password)
 		document.getElementById("password").value = "";
 	
-	if(login && password){
-		alert("Sign In!");
-		window.location.href = "map.html"
+	if(email && password){
+		socket.emit('signIn', { mail:email, password:password });
 	}
 }
 
 function Restore() {
 	if(CheckData("email", 10)){
 		alert("Message with password sent!");
-		window.location.href = "signIn.html"
+		socket.emit('restorePassword', {mail:email});
+		window.location.href = "signIn.html";
 	}
 }
 
@@ -58,7 +64,7 @@ function CheckData(elementId, minLenght) {
 	}
 	else{
 		document.getElementById(elementId).style.boxShadow = "none";
-		return true;
+		return document.getElementById(elementId).value;
 	}
 }
 
@@ -74,3 +80,19 @@ function ComparePassword() {
 		return true;
 	}
 }
+
+	socket.on('signIn',function (data){
+		if(data.mail != -1){
+			document.location.href = "map.html?mail=" + email;
+		}
+		else
+			alert("Error");
+	});
+
+	socket.on('signUp',function (data){
+		if(data.err == 0){
+			document.location.href = "map.html?mail=" + email;
+		}
+		else
+			alert("Error");
+	});

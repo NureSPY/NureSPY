@@ -12,20 +12,27 @@
 		<img id="logo" src="images/logo.png">
 		<div class="buttons">
 			<input type="button" class="current" name="map" value="Map">
-			<input type="button" name="chats" value="Chats">
-			<input type="button" name="events" value="Events">
-			<input type="button" name="profile" value="Profile">
+			<input type="button" name="chats" value="Chats" onclick="ToChats()">
+			<input type="button" name="events" value="Events" onclick="ToEvents()">
+			<input type="button" name="profile" value="Profile" onclick="ToProfile()">
 		</div>
-		<a href="index.html"><img id="exit" src="images/map/exit.png"></a>
+		<a href="index.html" onclick="SignOut()"><img id="exit" src="images/map/exit.png"></a>
 	</div>
-
 	<div class="info">
-		<div class="map">
+		<div id="buttons">
+			<input type="text" id="finder" name="finder" oninput="FinderTextChanged()">
+			<input type="button" id="clear" value="Clear" onclick="Clear()" style="visibility: hidden;">
+			<input type="button" id="find" value="Find" onclick="Find()" style="visibility: hidden;">
+			<input type="button" id="location" value="Show me" onclick="EditStatus()">
 		</div>
+		<div id="map"></div>
 	</div>
 </body>
 <footer class="footer-copyright">
     <p>&#169 NureSPY, Inc.</p>
-    <script type="text/javascript" src="script/input.js"></script>
+    <script type="text/javascript" src="script/user.js"></script>
+    <script type="text/javascript" src="script/socket.io.js"></script> 
+    <script type="text/javascript" src="script/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=map"></script>
 </footer>
 </html>

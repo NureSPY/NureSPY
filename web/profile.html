@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style/materialize.css">
+	<link rel="stylesheet" href="style/common.css">
+	<link rel="stylesheet" href="style/map.css">
+	<link rel="stylesheet" href="style/profile.css">
+	<script type="text/javascript" src="script/map.js"></script>
+	<title>Nure SPY</title></head>
+<body>
+	<div class="header">
+		<img id="logo" src="images/logo.png">
+		<div class="buttons">
+			<input type="button" name="map" value="Map" onclick="ToMap()">
+			<input type="button" name="chats" value="Chats" onclick="ToChats()">
+			<input type="button" name="events" value="Events" onclick="ToEvents()">
+			<input type="button" class="current" name="profile" value="Profile">
+		</div>
+		<img id="exit" onclick="SignOut()" src="images/map/exit.png">
+	</div>
+	<div class="info">
+		<table id="profile">
+			<tr>
+				<td class="title">Full name</td>
+				<td class="value"><input type="text" id="fullname"></td>
+			</tr>
+			<tr>
+				<td class="title">Email</td>
+				<td class="value"><input type="text" id="email"></td>
+			</tr>
+			<tr>
+				<td class="title">Phone</td>
+				<td class="value"><input type="text" id="phone"></td>
+			</tr>
+			<tr>
+				<td class="title">Group</td>
+				<td class="value"><input type="text" id="group"></td>
+			</tr>
+<!-- 			<tr>
+				<td class="title">Visible</td>
+				<td class="value">
+					<div class="switch">
+						<label>Off<input type="checkbox" id="visible"><span class="lever"></span>On</label>
+					</div>
+  				</td>
+			</tr> -->
+			<tr>
+				<td colspan="2" style="text-align: center;"><input type="button" onclick="EditProfile()" value="Edit profile"></td>
+			</tr>
+			<tr class="border-top">
+				<td class="title">Status</td>
+				<td class="value"><p>Status</p></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;"><input type="button" onclick="EditStatus()" value="Edit status"></td>
+			</tr>
+			<tr class="border-top">
+				<td class="title">Password</td>
+				<td class="value"><input type="text" id="password"></td>
+			</tr>			
+			<tr>
+				<td class="title">Repeat password</td>
+				<td class="value"><input type="text" id="repeat"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;"><input type="button" onclick="EditPassword()" value="Edit password"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+<footer class="footer-copyright">
+    <p>&#169 NureSPY, Inc.</p>
+    <script type="text/javascript" src="script/user.js"></script>
+    <script type="text/javascript" src="script/socket.io.js"></script> 
+    <script type="text/javascript" src="script/profile.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=map"></script>
+</footer>
+</html>

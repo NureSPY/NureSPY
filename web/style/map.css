@@ -59,15 +59,44 @@
 }
 
 .info{
-	height: 800px;
+	height: 100%;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
 	margin: 200px 0 0 0;
 	padding: 50px;
 }
 
-.map{
+#map{
 	width: 100%;
-	height: 100%;
+	height: 600px;
 	background-color: black;
+}
+
+#location, #clear, #find{
+	width: 10%;
+	height: 40px;
+	border: none;
+	background-color: #000040;
+	color: white;
+	cursor: pointer;
+}
+
+#location{
+	float: right;
+	margin: 0 0 20px 20px;
+}
+
+#location:hover, #clear:hover ,#find:hover{
+	background-color: #000060;
+}
+
+#finder{
+	float: left;
+	width: 50%;
+	color: white;
+	padding: 0 20px;
+	margin: 0 20px 0 0;
+}
+#finder:focus{
+	box-shadow: none;
 }

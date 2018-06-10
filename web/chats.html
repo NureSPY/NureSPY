@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="style/materialize.css">
+	<link rel="stylesheet" href="style/common.css">
+	<link rel="stylesheet" href="style/map.css">
+    <title>Nure SPY</title></head>
+<body>
+	<div class="header">
+		<img id="logo" src="images/logo.png">
+		<div class="buttons">
+			<input type="button" name="map" value="Map" onclick="ToMap()">
+			<input type="button" class="current" name="chats" value="Chats">
+			<input type="button" name="events" value="Events" onclick="ToEvents()">
+			<input type="button" name="profile" value="Profile" onclick="ToProfile()">
+		</div>
+		<a href="index.html"><img id="exit" src="images/map/exit.png"></a>
+	</div>
+	<div class="info">
+		<div id="chats"></div>
+	</div>
+</body>
+<footer class="footer-copyright">
+    <p>&#169 NureSPY, Inc.</p>
+	<script type="text/javascript" src="script/map.js"></script>
+</footer>
+</html>
