@@ -83,7 +83,7 @@ function ComparePassword() {
 
 	socket.on('signIn',function (data){
 		if(data.mail != -1){
-			document.location.href = "mao.html?mail=" + email;
+			document.location.href = "map.html?mail=" + email;
 		}
 		else
 			alert("Error");
@@ -91,7 +91,7 @@ function ComparePassword() {
 
 	socket.on('signUp',function (data){
 		if(data.err == 0){
-			document.location.href = "mao.html?mail=" + email;
+			document.location.href = "map.html?mail=" + email;
 		}
 		else
 			alert("Error");

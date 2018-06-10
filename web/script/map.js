@@ -96,11 +96,37 @@ function Find(){
 	});
 }
 
+function ToMap(){
+	if(user == null)
+		document.location.href = "map.html";
+	else
+		document.location.href = "map.html?mail=" + user.email;
+}
+
+function ToChats(){
+	if(user == null)
+		document.location.href = "chats.html";
+	else
+		document.location.href = "chats.html?mail=" + user.email;
+}
+
+function ToEvents(){
+	if(user == null)
+		document.location.href = "events.html";
+	else
+		document.location.href = "events.html?mail=" + user.email;
+}
+
+function ToProfile(){
+	if(user == null)
+		document.location.href = "profile.html";
+	else
+		document.location.href = "profile.html?mail=" + user.email;
+}
+
 socket.on('userGetInfo', function (data){
 	if(data.err == 0){
 		user = new User(email, data.fullname, data.group, data.phone, data.status);
-		if (window.localeStorage['currentUser'] == undefined)
-			window.localeStorage['currentUser'] = user;
 	}
 	else
 		alert("Error");
