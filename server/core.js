@@ -18,68 +18,7 @@ var dbcon = mysql.createConnection({
 
 dbcon.connect();
 
-class User
-{ 
-    constructor(id,mail)
-    { 
-        this.spayed_by = []; 
-        this.mail = mail; 
-        this.id = id; 
-        this.coords = 
-        { 
-            latitude : 0,
-            longitude : 0,
-            height : 0
-        } 
-    } 
-
-    StartSpy(id)
-    { 
-        this.spyed_by.push(id);
-    } 
-
-    StopSpy(id)
-    { 
-        this.spyed_by.splice(this.spyed_by.indexOf(id),1);
-    } 
-
-    GetSpies()
-    {
-        return this.spayed_by;
-    }
-
-    getId()
-    { 
-        return this.id; 
-    } 
-
-    setId(id)
-    { 
-        this.id = id; 
-    } 
-
-    getMail()
-    { 
-        return this.mail; 
-    } 
-
-    setMail(mail)
-    { 
-        this.mail = mail; 
-    } 
-
-    getCoords()
-    { 
-        return this.coords; 
-    } 
-    
-    setCoords(latitude, longitude, height)
-    { 
-        this.coords.latitude = latitude; 
-        this.coords.longitude = longitude; 
-        this.coords.height = height; 
-    } 
-};
+var User = require('./util/user').User;
 
 var users = [];
 
@@ -90,7 +29,7 @@ io.on('connection', (socket) =>
 
     socket.on('signIn', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on singIn');
+        console.log(users[socket.id].mail + ' on singIn');
         dbcon.query("SELECT password FROM user WHERE mail = '" + data.mail + "';",
         (err,table)=> 
         {
@@ -102,7 +41,7 @@ io.on('connection', (socket) =>
                     (err,table)=>
                     {
                         socket.emit('signIn',{mail:table[0].mail,fullname:table[0].fullname,phone:table[0].phone,status:table[0].status,group:table[0].group,stay_in:table[0].stay_in});
-                        users[socket.id].setMail(data.mail);
+                        users[socket.id].mail = data.mail;
                     });       
                 }    
                 else
@@ -119,7 +58,7 @@ io.on('connection', (socket) =>
 
     socket.on('signUp', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on singUp');
+        console.log(users[socket.id].mail + ' on singUp');
         dbcon.query("SELECT id FROM user WHERE mail = '" + data.mail + "';",
         (err,table)=>
         {
@@ -172,19 +111,19 @@ io.on('connection', (socket) =>
 
     socket.on('singOut', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on signOut');
+        console.log(users[socket.id].mail+ ' on signOut');
         users[socket.id].setMail('Guest');
         while(users[socket.id].GetSpies().length > 0)
         {
-            io.sockets.socket(users[socket.id].GetSpies()[0]).emit('userSpyedTargetDisconnected',{mail:users[socket.id].GetMail()});
+            io.sockets.socket(users[socket.id].spyed_by[0]).emit('userSpyedTargetDisconnected',{mail:users[socket.id].mail});
         }
-        users[socket.id].GetSpies() = [];
+        users[socket.id].spyed_by = [];
         socket.emit('signOut',{});
     });
 
     socket.on('chatCreate', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatCreate');
+        console.log(users[socket.id].mail + ' on chatCreate');
         dbcon.query("INSERT INTO chat SET name = '" + data.name + "';",
         (err)=>
         {
@@ -194,12 +133,12 @@ io.on('connection', (socket) =>
 
     socket.on('chatJoin', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatJoin');
+        console.log(users[socket.id].mail + ' on chatJoin');
         dbcon.query("SELECT id FROM user WHERE mail = '" + data.mail + "';",(err,table)=>
         {
             if(!err)
             {
-                dbcon.query("INSERT INTO chat_user SET chat_id = " + data.chat_id + ",user_id = " + table[0].id + ",access = '" + data.access + "';",
+                dbcon.query("INSERT INTO chat_user SET chat_id = " + data.id + ",user_id = " + table[0].id + ",access = '" + data.access + "';",
                 (err)=>
                 {
                     if(!err)
@@ -221,7 +160,7 @@ io.on('connection', (socket) =>
 
     socket.on('chatBan', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatBan');
+        console.log(users[socket.id].mail + ' on chatBan');
         dbcon.query("SELECT id FROM user WHERE mail = '" + data.mail + "';",
         (err,table)=>
         {
@@ -250,7 +189,7 @@ io.on('connection', (socket) =>
 
     socket.on('chatDelete', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatDelete');
+        console.log(users[socket.id].mail + ' on chatDelete');
         dbcon.query("DELETE FROM chat WHERE chat = " + data.id + ";",
         (err)=>
         {
@@ -267,7 +206,7 @@ io.on('connection', (socket) =>
 
     socket.on('chatGetMine', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatGetMine');
+        console.log(users[socket.id].mail + ' on chatGetMine');
         dbcon.query("SELECT chat.id FROM chat,user WHERE user.mail = '" + data.mail + "' AND chat.user_id = user.id;", 
         (err,table)=>
         {
@@ -284,7 +223,7 @@ io.on('connection', (socket) =>
 
     socket.on('chatGetInfo', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatGetInfo');
+        console.log(users[socket.id].mail + ' on chatGetInfo');
         dbcon.query("SELECT name FROM chat WHERE id = " + data.id + ";",
         (err,name)=>
         {
@@ -312,8 +251,8 @@ io.on('connection', (socket) =>
 
     socket.on('chatSend', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatSend');
-        dbcon.query("SELECT id FROM user WHERE mail = '" + users[socket.id].GetMail() + "';",
+        console.log(users[socket.id].mail + ' on chatSend');
+        dbcon.query("SELECT id FROM user WHERE mail = '" + users[socket.id].mail + "';",
         (err,table)=>
         {
             dbcon.query("INSERT INTO message SET user_id = " + table[0].id + ",chat_id = " + data.id + ",text = '" + data.text + "',datetime = '" + data.datetime + "';",
@@ -332,7 +271,7 @@ io.on('connection', (socket) =>
                                 {
                                     if(u.login == t.login)
                                     {
-                                        io.sockets.socket(u.id).emit('chatMessage',{chat_id:data.id,from:users[socket.id].GetMail(),text:data.text,datetime:data.datetime});
+                                        io.sockets.socket(u.id).emit('chatMessage',{chat_id:data.id,from:users[socket.id].mail,text:data.text,datetime:data.datetime});
                                     }
                                 }
                             }
@@ -354,7 +293,7 @@ io.on('connection', (socket) =>
 
     socket.on('charGetMessages', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatGetMessages');
+        console.log(users[socket.id].mail + ' on chatGetMessages');
         dbcon.query("SELECT user.mail,text,datetime FROM message,user WHERE message.user_id = user.id AND message.chat_id = " +  data.id+ ";",
         (err,table)=>
         {
@@ -371,7 +310,7 @@ io.on('connection', (socket) =>
 
     socket.on('chatChangeAccess', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on chatChangeAccess');
+        console.log(users[socket.id].mail + ' on chatChangeAccess');
         dbcon.query("SELECT id FROM user WHERE mail = '" + data.mail + "';", 
         (err,table)=>
         {
@@ -392,7 +331,7 @@ io.on('connection', (socket) =>
 
     socket.on('userEditProfile', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on userEditProfile');
+        console.log(users[socket.id].mail + ' on userEditProfile');
         dbcon.query("UPDATE user SET fullname = '" + data.fullname + "', phone = '" + data.phone + "', status = '" + data.status + "' `group` = '" + data.group + "';", 
         (err)=>
         {
@@ -402,27 +341,149 @@ io.on('connection', (socket) =>
 
     socket.on('userGetInfo', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on userGetInfo');
+        console.log(users[socket.id].mail + ' on userGetInfo');
         dbcon.query("SELECT * FROM user WHERE mail = '" + data.mail + "';", 
         (err, table)=>
         {
-            if(!err)
+            if(err)
             {
-                socket.on('userGetInfo',{err:1});
+                socket.emit('userGetInfo',{err:1});
             }
             else
             {
-                socket.on('userGetInfo',{err:0, fullname:table[0].fullname, phone:table[0].phone, group:table[0].group, status:table[0].status});
+                socket.emit('userGetInfo',{err:0, fullname:table[0].fullname, phone:table[0].phone, group:table[0].group, status:table[0].status});
+            }
+        });
+    });
+
+    socket.on('userMove', (data) => 
+    {
+        console.log(users[socket.id].mail + ' on userMove');
+        users[socket.id].latitude = data.latitude;
+        users[socket.id].longitude = data.longitude;
+        users[socket.id].height = data.height;
+        for(var u in users)
+        {
+            io.sockets.spcket(u.id).emit('userMove',{spyed:0,mail:users[socket.id].mail,latitude:data.latitude, longitude:data.longitude, height:data.height});
+        }
+        for(var spy in users[socket.id].spyed_by)
+        {
+            io.sockets.socket(spy).emit('userMove',{spyed:1,mail:users[socket.id].mail,latitude:data.latitude, longitude:data.longitude, height:data.height});
+        }
+    });
+    
+    socket.on('userDelete', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on userDelete');
+        dbcon.query("DELETE FROM user WHERE mail = '" + data.mail + "';");
+    })
+
+    socket.on('userSpy', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on userPsy');
+        var b = 1;
+        for(var u in users)
+        {
+            if(u.mail == data.mail)
+            {
+                u.spyed_by.push(socket.id);
+                b = 0;
+                break;
+            }
+        }
+        socket.emit('userSpy',{err:b});
+    });
+
+    socket.on('userSpyStop', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on userSpyStop');
+        for(var u in users)
+        {
+            if(u.mail == data.mail)
+            {
+                u.spyed_by.splice(indexOf(scoket.id),1);
+                socket.emit('userSpyStop',{});
+                break;
+            }
+        }
+    });
+
+    socket.on('eventCreate', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on eventCreate');
+        dbcon.query("SELECT id FROM user WHERE mail = '" + users[socket.id].mail + "';", 
+        (err,user)=>
+        {
+            dbcon.query("INSERT INTO event SET name = '" + data.name + "', user_id = '" + user[0].id
+            + "', datetime = '" + data.datetime + "', location = '" + data.location 
+            + "', duration = '" + data.duration + "',  description = '" + data.description + "';", 
+            (err) =>
+            {
+                socket.emit('eventCreate', {err:err});
+            });
+        });
+    });
+
+    socket.on('eventGetAll', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on eventGetAll');
+        dbcon.query("SELECT id, name, datetime FROM event;", 
+        (err) =>
+        {
+            socket.emit('eventGetAll', {err:err});
+        });
+    });
+
+    socket.on('eventGetInfo', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on eventGetInfo');
+        dbcon.query("SELECT description, location, duration FROM event WHERE id = '" + data.id + "';", 
+        (err,table) =>
+        {
+            socket.emit('eventGetInfo', {description:table[0].description,location:table[0].location,duration:table[0].duration});
+        });
+    });
+
+    socket.on('eventValidate', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on eventValidate');
+        dbcon.query("UPDATE event SET confirmed = 1 WHERE id = " + data.id + ";", 
+        (err) =>
+        {
+            if(!err)
+            {
+                socket.emit('eventValidate',{});
+            }
+            else
+            {
+                console.log(err);
+            }
+        });
+    });
+
+    socket.on('eventDismiss', (data) =>
+    {
+        console.log(users[socket.id].mail + ' on eventDismiss');
+        dbcon.query("DELETE FROM event WHERE id = '" + data.id + "';", 
+        (err)=>
+        {
+            if(!err)
+            {
+                socket.emit('eventDismiss',{});
+            }
+            else
+            {
+                console.log(err);
             }
         });
     });
 
     socket.on('disconnect', (data)=>
     {
-        console.log(users[socket.id].GetMail() + ' on disconnect');
-        for(var spy in users[socket.id].GetSpies())
+        console.log(users[socket.id].mail + ' on disconnect');
+        for(var spy in users[socket.id].spyed_by)
         {
-            io.sockets.socket(spy).emit('userSpyedTargetDisconnected',{mail:users[socket.id].GetMail()});
+            io.sockets.socket(spy).emit('userSpyedTargetDisconnected',{mail:users[socket.id].mail});
         }
         users.splice(users.id,1);
     });
