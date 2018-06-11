@@ -74,8 +74,8 @@ io.on('connection', socket => {
       })
     })
 
-   socket.on('singOut', data =>{
-     console.log(`[SING OUT] ${user.getMail()} is on Singing Out!`);
+   socket.on('signOut', data =>{
+     console.log(`[SING OUT] ${user.getMail()} is on Signing Out!`);
       let b = onlineUsers.delete(socket.id);
       socket.emit('signOut',{isSignedOut: b});
   });
@@ -179,26 +179,20 @@ io.on('connection', socket => {
             });
         });
 
-  socket.on('userMove', pos => {
-  //  console.log(socket.id, socket.client.id);
-     user.setCoords(pos.lat, pos.lng)
-    let coords = user.getCoords()
-    //console.log(socket.id, coords.lat, coords.lng)
-    const {lat, lng, h} = user.getCoords()
-    console.log(`${user.getMail()} has moved to ${lat} , ${lng}`)
-    locationMap.set(socket.id, pos)
-  })
-
-  socket.on('requestLocations', () => {
-  let arr = []
-  onlineUsers.forEach((val, key, map)=>{
-    if(val.getMail() != user.getMail()) arr.push({mail: val.getMail(), coords: val.getCoords()})
-  })
-    socket.emit('locationsUpdate', arr)
+  socket.on('userMove', data => {
+    console.log(user.getMail() + ' on userMove');
+    user.setCoords(data.latitude, data.longitude, data.height);
+    onlineUsers.forEach((val, key, map)=>{
+      socket.to(key).emit('userMove',{spyed:0, mail:user.getMail() ,latitude:data.latitude, longitude:data.longitude, height:data.height});
+    })
+    user.spayed_by.forEach((val, key, map)=>{
+      socket.to(key).emit('userMove',{spyed:1, mail:user.getMail() ,latitude:data.latitude, longitude:data.longitude, height:data.height});
+    })
+    console.log(`${user.getMail()} has moved to ${user.getCoords().lat} , ${user.getCoords().lng} ${user.getCoords().h}`)
   })
   
   socket.on('userEditProfile', data =>{
-    db.query("UPDATE user SET fullname = '"+data.fullname+"', phone = '"+data.phone+"', status = '"+data.status+"' `group` = '"+data.group+"' WHERE id = '"+user.getId()+"';", res =>{
+    db.query("UPDATE user SET fullname = '"+data.fullname+"', phone = '"+data.phone+"', status = '"+data.status+"', `group` = '"+data.group+"' WHERE id = '"+user.getId()+"';", res =>{
       console.log(res)
     })
   })
@@ -235,10 +229,10 @@ io.on('connection', socket => {
   socket.on('eventCreate', data =>{
     db.query("INSERT INTO event SET name = '"+data.name+
     "', user_id = '"+user.getId()+
-    "', datetime = '"+date.datetime+
-    "', location = '"+date.location+
-    "', duration = '"+date.location+
-    "',  description = '"+date.description+
+    "', datetime = '"+data.datetime+
+    "', location = '"+data.location+
+    "', duration = '"+data.location+
+    "',  description = '"+data.description+
     "';", res =>{
       socket.emit('eventCreate', res)
     })
@@ -258,11 +252,27 @@ io.on('connection', socket => {
       console.log(res)
     })
   })
+  socket.on('userGetGroups', data =>
+  {
+      console.log(user.getMail() + ' on userGetGroups');
+      db.query("SELECT DISTINCT `group` FROM user WHERE status = '" + data.status + "';", 
+      res =>
+      {
+              socket.emit('userGetGroups',{groups:res});
+      });
+  });
+
   socket.on('eventDisquit', data =>{
     db.query("DELETE FROM event WHERE id = '"+data.id+"';")
   })
-  
-  socket.on('filterByGroup', data =>{
+  socket.on('searchByMail', data=>{
+    let b = false;
+    onlineUsers.forEach((val, key, map)=>{
+      if(val.getMail() == data.mail) b = true
+    })
+    socket.emit("searchByMail", {found: b})
+  })
+/*   socket.on('filterByGroup', data =>{
     db.query("SELECT mail FROM user WHERE `group` = '"+data.group+"';", res =>{
       console.log(`USER ${user.getMail()} TRY TO FILTER BY ${data.group} GROUP`)
       socket.emit('filterByGroup', res)
@@ -273,7 +283,28 @@ io.on('connection', socket => {
       console.log(`USER ${user.getMail()} TRY TO FILTER BY ${data.status} STATUS`)
     })
     socket.emit('filterByStatus', res)
-  })
+  }) */
+  socket.on('userFilter', data =>
+    {
+        console.log(user.getMail() + ' on userFilter');
+        if(data.status != undefined && data.group != undefined)
+      {
+          db.query("SELECT mail FROM user WHERE status = '" + data.status + "' AND `group` = '" + data.group + "';", res=>{
+                  socket.emit('userFilter',{users:res});
+          })
+      }else 
+      if(data.status == undefined && data.group != undefined)
+      {
+          db.query("SELECT mail FROM user WHERE `group` = '" + data.group + "';", res=>{
+            socket.emit('userFilter',{users:res});
+          })
+      }else if(data.status != undefined && data.group == undefined){
+        db.query("SELECT mail FROM user WHERE status = '" + data.status + "';", res=>{
+          socket.emit('userFilter',{users:res});
+        })
+
+      }
+    });
   socket.on('disconnect', () => {
     console.log('A user disconnected.');
     user.spayed_by.forEach((value, index, array)=>{
@@ -284,7 +315,7 @@ io.on('connection', socket => {
   })
   
 })
-server.listen(3001,"0.0.0.0", err => {
+server.listen(3002,"0.0.0.0", err => {
   /* db.query("SELECT * FROM user", res =>{
     console.log(res)
   }) */
