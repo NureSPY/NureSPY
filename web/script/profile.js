@@ -19,7 +19,7 @@ function EditProfile(){
 	var phone = CheckData('phone', 10);
 	var group = CheckData('group', 4);
 
-	if(fullname && email && phone && group){
+	if (fullname && email && phone && group){
 		user.fullname = fullname;
 		user.email = email;
 		user.phone = phone;
@@ -29,10 +29,24 @@ function EditProfile(){
 	}
 }
 
+function EditStatus() {
+	if (false) {
+		alert('Request has been sent');
+		socket.emit('userEditStatus', {mail:user.email, fullname:user.fullname, group:user.group})
+	}
+	else{
+		var result = confirm('Are you sure?');
+		if(result && user != null) {
+			user.status = "teacher";
+			document.getElementById('status').textContent = user.status;
+		}
+	}
+}
+
 function CheckData(id, minLenght) {
 	minLenght = minLenght ? minLenght : 6;
 
-	if(IsEmpty(id, minLenght)){
+	if (IsEmpty(id, minLenght)){
 		document.getElementById(id).style.boxShadow = "0 0 20px red";
 		return false;
 	}
@@ -48,6 +62,34 @@ function IsEmpty(id, minLenght){
 		return true;
 	else
 		return false;
+}
+
+function ToMap(){
+	if(user == null)
+		document.location.href = "map.html";
+	else
+		document.location.href = "map.html?mail=" + user.email;
+}
+
+function ToChats(){
+	if(user == null)
+		document.location.href = "chats.html";
+	else
+		document.location.href = "chats.html?mail=" + user.email;
+}
+
+function ToEvents(){
+	if(user == null)
+		document.location.href = "events.html";
+	else
+		document.location.href = "events.html?mail=" + user.email;
+}
+
+function ToProfile(){
+	if(user == null)
+		document.location.href = "profile.html";
+	else
+		document.location.href = "profile.html?mail=" + user.email;
 }
 
 socket.on('userGetInfo', function (data){
