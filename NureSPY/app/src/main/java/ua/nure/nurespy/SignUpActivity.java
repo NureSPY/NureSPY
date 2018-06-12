@@ -47,7 +47,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    Socket socket;
+    private Socket socket;
     //MyTask mt;
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -110,42 +110,53 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         signUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Global app = (Global) getApplication();
                 socket = app.getSocket();
                 socket.connect();
                 attemptLogin();
                 String status;
                 if (studSwitch.isChecked()) {
-                    status = "student";
-                    groupText = findViewById(R.id.groupText);
-                    JSONObject obj = new JSONObject();
-                    try {
-                        obj.put("mail", email.getText().toString());
-                        obj.put("password", password.getText().toString());
-                        obj.put("fullname", fullName.getText().toString());
-                        obj.put("phone", phone.getText().toString());
-                        obj.put("group", groupText.getText().toString());
-                        obj.put("status", status);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    if (email.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0 &&
+                            fullName.getText().toString().trim().length() != 0 &&
+                            phone.getText().toString().trim().length() != 0 &&
+                            groupText.getText().toString().trim().length() != 0) {
+                        status = "student";
+                        groupText = findViewById(R.id.groupText);
+                        JSONObject obj = new JSONObject();
+                        try {
+                            obj.put("mail", email.getText().toString());
+                            obj.put("password", password.getText().toString());
+                            obj.put("fullname", fullName.getText().toString());
+                            obj.put("phone", phone.getText().toString());
+                            obj.put("group", groupText.getText().toString());
+                            obj.put("status", status);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                    socket.emit("signUp", obj);
+                        socket.emit("signUp", obj);
+                    }
                 } else {
-                    status = "teacher";
-                    JSONObject obj = new JSONObject();
-                    try {
-                        obj.put("mail", email.getText().toString());
-                        obj.put("password", password.getText().toString());
-                        obj.put("fullName", fullName.getText().toString());
-                        obj.put("phone", phone.getText().toString());
-                        // obj.put("group", "null");
-                        obj.put("status", status);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    if (email.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0 &&
+                            fullName.getText().toString().trim().length() != 0 &&
+                            phone.getText().toString().trim().length() != 0) {
+                        status = "teacher";
+                        JSONObject obj = new JSONObject();
+                        try {
+                            obj.put("mail", email.getText().toString());
+                            obj.put("password", password.getText().toString());
+                            obj.put("fullName", fullName.getText().toString());
+                            obj.put("phone", phone.getText().toString());
+                            obj.put("group", "0");
+                            obj.put("status", status);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                    socket.emit("signUp", obj);
+                        socket.emit("signUp", obj);
+
+                    }
                 }
 
                 socket.on("signUp", new Emitter.Listener() {

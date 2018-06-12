@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:background="@android:color/background_light"
     tools:context=".NavActivity"
     tools:showIn="@layout/app_bar_nav">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="435dp"
+        android:layout_height="wrap_content"
+        android:text="Добро пожаловать,"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Данное приложение было разработано командой студентов ХНУРЭ. " />
 </LinearLayout>

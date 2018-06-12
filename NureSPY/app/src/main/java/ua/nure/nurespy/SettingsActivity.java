@@ -164,10 +164,17 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Global app = (Global) getApplication();
                 socket = app.getSocket();
-                socket.emit("userDelete");
-                socket.disconnect();
-                Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
-                startActivity(intent);
+                socket.emit("signOut");
+
+
+                socket.on("signOut", new Emitter.Listener() {
+                    @Override
+                    public void call(Object... args) {
+                        socket.disconnect();
+                        Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -176,25 +183,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Global app = (Global) getApplication();
                 socket = app.getSocket();
-                socket.emit("signOut");
-                socket.on("signOut", new Emitter.Listener() {
-                    @Override
-                    public void call(Object... args) {
-                        JSONObject obj = (JSONObject) args[0];
-                        int code = 0;
-                        try {
-                            code = obj.getInt("isSignedOut");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        if (code == 0){
-                            socket.disconnect();
-                            Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
-                            startActivity(intent);
-                        }
+                socket.emit("userDelete");
 
-                    }
-                });
+                socket.disconnect();
+                Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -40,9 +40,10 @@ import io.socket.emitter.Emitter;
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog.Builder ad;
 
-    Socket socket;
+    private Socket socket;
     TextView textViewUserName;
     TextView textViewUserMail;
+    TextView textViewNav;
     String fullname = "";
     String phone = "";
     String mail = "";
@@ -60,14 +61,6 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         setSupportActionBar(toolbar);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -79,6 +72,11 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         View headerView = navigationView.getHeaderView(0);
         textViewUserName = headerView.findViewById(R.id.textViewUserName);
         textViewUserMail = headerView.findViewById(R.id.textViewUserMail);
+
+       // View navigationView1 = findViewById(R.id.app_bar);
+        textViewNav = findViewById(R.id.textView2);
+
+
         Intent intent = getIntent();
 
         fullname = intent.getStringExtra("fullname");
@@ -90,6 +88,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         textViewUserName.setText(fullname);
         textViewUserMail.setText(mail);
+        textViewNav.setText(fullname + "!");
 
     }
 
@@ -132,11 +131,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_meet) {
-            Intent intent = new Intent(NavActivity.this, EventActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_settings) {
+        if (id == R.id.nav_settings) {
             Intent intent = new Intent(NavActivity.this, SettingsActivity.class);
             intent.putExtra("fullname", fullname);
             intent.putExtra("mail", mail);
@@ -147,6 +142,12 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             startActivity(intent);
         } else if (id == R.id.nav_maps) {
             Intent intent = new Intent(NavActivity.this, MapsActivity.class);
+            intent.putExtra("fullname", fullname);
+            intent.putExtra("mail", mail);
+            intent.putExtra("password", password);
+            intent.putExtra("group", group);
+            intent.putExtra("status", status);
+            intent.putExtra("phone", phone);
             startActivity(intent);
         }
 

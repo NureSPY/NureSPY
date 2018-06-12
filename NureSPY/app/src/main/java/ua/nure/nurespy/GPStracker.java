@@ -46,12 +46,10 @@ public class GPSTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        //runOnUiThread(new Runnable() {
-         //   @Override
-          //  public void run() {
-                Toast.makeText(context, "loc changed", Toast.LENGTH_SHORT).show();
-          //  }
-       // });
+        double lat = location.getLatitude();
+        double longi = location.getLongitude();
+        Toast.makeText(context, "My Location is \n" + lat + "\n" + longi, Toast.LENGTH_SHORT).show();
+        getLastKnownLocation();
     }
 
     @Override

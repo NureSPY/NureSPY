@@ -67,7 +67,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
     private EditText password;
     private View mProgressView;
     private View mLoginFormView;
-    Socket socket;
+    private Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +162,7 @@ public class SignInActivity extends AppCompatActivity implements LoaderCallbacks
                                 @Override
                                 public void run() {
                                     Toast.makeText(getApplicationContext(), "Wrong mail", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                         } else if (code == 2) {
